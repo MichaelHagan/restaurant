@@ -1,0 +1,11 @@
+#category-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    &:hover{
+        cursor: pointer;
+    }
+}

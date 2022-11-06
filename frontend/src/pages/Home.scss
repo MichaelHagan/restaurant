@@ -1,0 +1,85 @@
+$orange-light : #FD841F;
+$orange-deep : #E14D2A;
+$red : #CD104D;
+$purple : #9C2C77;
+
+*{
+    box-sizing: border-box;
+}
+#home-main{
+display: flex;  
+height: 100vh;
+.main-page{
+    width: 100%;
+    height: 100%;
+
+
+    #header-main{
+        height: 10%;
+    }
+
+    .body{
+        box-sizing: border-box;
+        height: 80%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        #categorylist-main{
+            height: 95%;
+        }
+
+        .categories{
+            height: 92%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+            #category-main{
+                height: 24%;
+            }   
+        }
+    }
+
+    #footer-main{
+        height: 10%;
+    }
+
+}
+
+//TODO:add mediaquery to only implement for browser view
+@media (min-width:825px ){
+::-webkit-scrollbar {
+width:0.4rem;
+}
+
+::-webkit-scrollbar-track {
+    background: lightgray;
+    border-radius: 100vw;
+    margin-block: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100vw;
+    background: rgb(172, 172, 172);
+}
+}
+
+
+
+@media (max-width:1080px ){
+    
+    #sidecard-main{
+        *{
+        font-size: .7rem;
+    }
+}
+}
+
+}

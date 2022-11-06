@@ -1,0 +1,16 @@
+$orange-light : #FD841F;
+$orange-deep : #E14D2A;
+$red : #CD104D;
+$purple : #9C2C77;
+
+#footer-main{
+    background-color: $purple;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    border-radius: 0 0 5px 5px; 
+    h1{
+        color:$orange-light;
+    }
+}
