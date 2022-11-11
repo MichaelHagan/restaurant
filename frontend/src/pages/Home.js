@@ -30,7 +30,9 @@ const Home = () => {
   {id:15,name:"Rice Chicken",desc:"Nicely prepared",price:30},
   {id:16,name:"Rice Chicken",desc:"Nicely prepared",price:30},
   {id:17,name:"Rice Chicken",desc:"Nicely prepared",price:30}]);
+  
   const [selectedfoods,setSelectedfoods] = useState([]);
+
   const handleClick = (bool,header) =>{
     setbl(bool);
     setHeading(header);
@@ -68,10 +70,19 @@ const Home = () => {
     setSelectedfoods(selectedfoods.filter(el=>el.id!=id));
   }
 
+  const clearOrders = () =>{
+  setSelectedfoods([]);
+  }
+
 
   return (
     <div id="home-main">
-      {sidebar&&<SideBar List={selectedfoods} remove={removeSelected} updateQuantity={updateQuantity}/>}
+      {sidebar&&<SideBar 
+      List={selectedfoods} 
+      remove={removeSelected} 
+      updateQuantity={updateQuantity}
+      clearOrders = {clearOrders}
+      />}
       <div className="main-page">
         <Header handleClick={showSide} count={selectedfoods.length} />
         <div className="body">

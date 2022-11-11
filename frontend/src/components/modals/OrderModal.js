@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,7 +6,7 @@ import ModalListElement from './ModalListElement';
 import Swal from 'sweetalert2';
 import './OrderModal.scss';
 
-const OrderModal = ({orders}) => {
+const OrderModal = ({orders,clearOrders}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,11 +15,46 @@ const OrderModal = ({orders}) => {
   const handleClose2 = () => setShow2(false);
 
   const switchModal = () =>{
+    setOrderTotal(calculateTotal()+info.deliveryfee);
     setShow(false);
     setShow2(true);
   }
 
-  let val = 'test';
+  const [orderTotal, setOrderTotal] = useState(0);
+
+  const [info,setInfo] = useState({
+    "location":"No Delivery",
+    "deliveryfee":0
+});
+
+  const Delivery = { 
+  "New York":5,
+  "New Jersey":6,
+  "Florida":5,
+  "Queens":4,
+  "Town":3,
+  "No Delivery":0
+}
+
+
+const calculateTotal = () =>{
+  let total = 0;
+
+  for(let i = 0; i<orders.length;i++){
+    total += orders[i].price * orders[i].quantity;
+  }
+
+  return total;
+
+}
+
+
+  const setFormInfo = (field,value) =>{
+  setInfo({...info,
+  [field]:value
+  })
+  }
+
 
   const orderHandler = ()=>{
     //Create API Call to send order and use response from server to trigger success or failure
@@ -34,6 +69,12 @@ const OrderModal = ({orders}) => {
         timer: 2000
       })
       setShow2(false);
+
+      (function(){
+        clearOrders();
+    })();
+      
+    
     }else{
       Swal.fire({
         position: 'center',
@@ -43,7 +84,13 @@ const OrderModal = ({orders}) => {
       })
     }
 
+  }
 
+  const setDelivery=(location,deliveryfee)=>{
+    setInfo({...info,
+      "location":location,
+      "deliveryfee":deliveryfee
+      })
   }
 
   return (
@@ -59,25 +106,32 @@ const OrderModal = ({orders}) => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder=""
                 autoFocus
+                value={info.name}
+                onChange = { e => setFormInfo('name',e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="number">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
                 type="text"
                 placeholder=""
+                value={info.number}
+                onChange = { e => setFormInfo('number',e.target.value)}
               />
             </Form.Group>
 
-        <Form.Group controlId="formGridState">
+        <Form.Group controlId="delivery">
           <Form.Label>Delivery</Form.Label>
-          <Form.Select defaultValue="No Delivery" value={val}>
+          <Form.Select defaultValue="No Delivery" 
+          value={info.location}
+          onChange = { e => setDelivery(e.target.value,Delivery[e.target.value])}
+          >
             <option>New York</option>
             <option>New Jersey</option>
             <option>Florida</option>
@@ -110,6 +164,11 @@ const OrderModal = ({orders}) => {
           <Modal.Title>Confirm Order</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{display:"flex", flexDirection:"column", alignContent:"center"}}>
+          <div style={{display:"flex", justifyContent:"space-between"}}>
+            <h5>{info.name}</h5>
+            <h5>{info.number}</h5>
+          </div>
+          
           {orders.map(order=>{
               return <div key={order.id}>
               <ModalListElement 
@@ -119,17 +178,23 @@ const OrderModal = ({orders}) => {
               />
               </div>
           })}
-          <div style={{ width: "100%", display: "flex", borderBottom: "1px solid gray", height:"3rem"}}>
+          <div style={{ width: "100%", display: 
+          "flex", borderBottom: "1px solid gray", 
+          height:"3rem",
+          justifyContent: "space-between"
+          }}>
+          <div style={{width:"85%", display:"flex", padding:"0"}}>
             <p style={{width:"20%", margin:"auto 0"}}>Delivery</p>
-            <p style={{width:"65%", margin:"auto 0"}}>{val}</p>
-            <p style={{width:"15%", margin:"auto 0"}}>GHC5</p>
+            <p style={{width:"65%", margin:"auto 0"}}>{info.location}</p>
+          </div>
+            <p style={{width:"15%", margin:"auto 0", textAlign:"right"}}>GHC{info.deliveryfee}</p>
           </div>
           <div style={{ width: "100%", display: "flex", justifyContent:"space-between"}}>
             <h3>
               Total
             </h3>
             <h3>
-              GHC200
+              GHC{orderTotal}
             </h3>
           </div>
         </Modal.Body>

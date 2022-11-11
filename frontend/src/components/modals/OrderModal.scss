@@ -24,10 +24,16 @@ $Color4:#F4EEA9;
     height: 3rem;
     display: flex;
     border-bottom: 1px solid gray;
+    justify-content: space-between;
     p{
         margin: auto 0;
     }
 
+    .container{
+        width: 85%;
+        display: flex;
+        padding: 0;
+    } 
     .name{
         width: 80%;
     }
@@ -37,6 +43,7 @@ $Color4:#F4EEA9;
     }
 
     .total{
+        text-align: right;
         width:15%;
     }
 
