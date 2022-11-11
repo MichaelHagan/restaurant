@@ -9,6 +9,35 @@ $purple : #9C2C77;
 #home-main{
 display: flex;  
 height: 100vh;
+
+
+
+.sidebar-main{
+    // animation-delay: 2s;
+    // animation: slideMe .5s ease-in;
+
+    // @keyframes slideMe{
+    //     0%{
+    //     transform: translateX(-500px);
+    //     }
+    //     60%{
+    //     transform: translateX(0px);
+    //     }
+    //     62%{
+    //     transform: translateX(30px);
+    //     }
+        
+    //     100%{
+    //     transform: skew(0deg) ;
+    //     }
+        
+    //     }
+
+} 
+
+
+
+
 .main-page{
     width: 100%;
     height: 100%;
@@ -42,7 +71,12 @@ height: 100vh;
             justify-content: space-between;
 
             #category-main{
-                height: 24%;
+                height: 24% !important;
+                width: 100%;
+                .card-img{
+                    height:100%;
+                    width: 100%;
+                }
             }   
         }
     }

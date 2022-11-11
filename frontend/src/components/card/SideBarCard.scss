@@ -31,13 +31,24 @@ $purple : #9C2C77;
         img {
             border-radius: 5px;
         }
+
+        .icon{
+            position:absolute;
+            top: 0;
+            right: 0.1rem;
+            &:hover{
+                color: red;
+            }
+        }
     }
 
     .buttons {
         display: flex;
         height: 10%;
+        width: fit-content;
+        width: -moz-fit-content;
         align-items: center;
-        justify-items: center;
+        justify-content: space-between;
         font-size: larger;
         transform: scale(0.8);
     }

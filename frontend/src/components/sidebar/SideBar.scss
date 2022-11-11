@@ -1,9 +1,14 @@
+$Color1:#064635;
+$Color2:#519259;
+$Color3:#F0BB62;
+$Color4:#f3f0d3;
+
 .sidebar-main{
     border-radius: 5px;
     width: 15%;
     height: 100%;
     min-width: 7.5rem;
-    background-color: rgb(234, 205, 205);
+    background-color: $Color4;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -13,6 +18,14 @@
     overflow-x: hidden;
     }
 
+.empty{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+    
 .order-button{
 
     margin-top: 1rem;

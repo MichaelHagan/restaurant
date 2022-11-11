@@ -3,14 +3,19 @@ $orange-deep : #E14D2A;
 $red : #CD104D;
 $purple : #9C2C77;
 
+$Color1:#064635;
+$Color2:#519259;
+$Color3:#F0BB62;
+$Color4:#F4EEA9;
+
 #footer-main{
-    background-color: $purple;
+    background-color: $Color1;
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
     border-radius: 0 0 5px 5px; 
     h1{
-        color:$orange-light;
+        color:$Color4;
     }
 }

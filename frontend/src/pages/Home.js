@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Card from '../components/card/Card1';
+import Button from 'react-bootstrap/Button';
 import SideBar from '../components/sidebar/SideBar';
 import SearchBar from '../components/search/SearchBar';
 import Header from '../components/header/Header';
@@ -11,18 +11,69 @@ import './Home.scss';
 const Home = () => {
   const [bl, setbl] = useState(true);
   const [heading, setHeading] = useState("");
-  // var bl =true;
+  const [sidebar,setSidebar] = useState(false);
+  const [foodlist,setFoodlist] = useState([
+  {id:1,name:"Rice",desc:"Nicely prepared",price:30},
+  {id:2,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:3,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:4,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:5,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:6,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:7,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:8,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:9,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:10,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:11,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:12,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:13,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:14,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:15,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:16,name:"Rice Chicken",desc:"Nicely prepared",price:30},
+  {id:17,name:"Rice Chicken",desc:"Nicely prepared",price:30}]);
+  const [selectedfoods,setSelectedfoods] = useState([]);
   const handleClick = (bool,header) =>{
     setbl(bool);
     setHeading(header);
   }
 
+  const showSide=()=>{
+    setSidebar(!sidebar);
+  }
+
+  const updateQuantity = (id,effect) =>{
+    for(let i=0;i<selectedfoods.length;i++){
+      if(id == selectedfoods[i].id){
+        effect?selectedfoods[i].quantity++ : selectedfoods[i].quantity--;
+      }
+    }
+    setSelectedfoods([...selectedfoods]);
+  }
+
+  const addSelected = (selected) =>{
+  let notexist=true; 
+  
+  selectedfoods.forEach(element => {
+    if(element.id===selected.id){
+      notexist = false;
+    }
+  });  
+    
+  if(notexist){
+    setSelectedfoods([...selectedfoods, {...selected, quantity:1}])
+  }
+
+}
+
+  const removeSelected = (id) =>{
+    setSelectedfoods(selectedfoods.filter(el=>el.id!=id));
+  }
+
 
   return (
     <div id="home-main">
-      <SideBar />
+      {sidebar&&<SideBar List={selectedfoods} remove={removeSelected} updateQuantity={updateQuantity}/>}
       <div className="main-page">
-        <Header />
+        <Header handleClick={showSide} count={selectedfoods.length} />
         <div className="body">
           <SearchBar />
           {bl? 
@@ -33,11 +84,11 @@ const Home = () => {
             <Category handleClick={handleClick} title={"Continental"} background={"continental"} />
           </div>:
           <div> 
-          <button 
+          <Button variant="outline-secondary"
             onClick={()=>setbl(!bl)}>
             Back
-          </button>
-           <CategoryList Category={heading} List={[1,2,3,4,5,6,7,8,7,6,,5,4,4,4,4,4,4,1,2,3,4,5,6,7,8,7,6,,5,4,4,4,4,4,4,1,2,3,4,5,6,7,8,7,6,,5,4,4,4,4,4,4,1,2,3,4,5,6,7,8,7,6,,5,4,4,4,4,4,4]}/>
+          </Button>
+           <CategoryList Category={heading} List={foodlist} selectHandler={addSelected} />
           </div> 
            }
         </div>

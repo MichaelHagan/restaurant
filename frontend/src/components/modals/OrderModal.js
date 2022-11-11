@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import ModalListElement from './ModalListElement';
+import Swal from 'sweetalert2';
+import './OrderModal.scss';
 
-const OrderModal = () => {
+const OrderModal = ({orders}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -14,6 +17,33 @@ const OrderModal = () => {
   const switchModal = () =>{
     setShow(false);
     setShow2(true);
+  }
+
+  let val = 'test';
+
+  const orderHandler = ()=>{
+    //Create API Call to send order and use response from server to trigger success or failure
+    let status = true;
+
+    if(status){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your order has been placed',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setShow2(false);
+    }else{
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Sorry, something went wrong, please check your order and try again',
+        showConfirmButton: true,
+      })
+    }
+
+
   }
 
   return (
@@ -47,7 +77,7 @@ const OrderModal = () => {
 
         <Form.Group controlId="formGridState">
           <Form.Label>Delivery</Form.Label>
-          <Form.Select defaultValue="No Delivery">
+          <Form.Select defaultValue="No Delivery" value={val}>
             <option>New York</option>
             <option>New Jersey</option>
             <option>Florida</option>
@@ -77,15 +107,36 @@ const OrderModal = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>Confirm Order</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{display:"flex", flexDirection:"column", alignContent:"center"}}>
-          <div className=''>          </div>
+          {orders.map(order=>{
+              return <div key={order.id}>
+              <ModalListElement 
+              name={order.name}
+              quantity={order.quantity}
+              total={order.quantity * order.price}
+              />
+              </div>
+          })}
+          <div style={{ width: "100%", display: "flex", borderBottom: "1px solid gray", height:"3rem"}}>
+            <p style={{width:"20%", margin:"auto 0"}}>Delivery</p>
+            <p style={{width:"65%", margin:"auto 0"}}>{val}</p>
+            <p style={{width:"15%", margin:"auto 0"}}>GHC5</p>
+          </div>
+          <div style={{ width: "100%", display: "flex", justifyContent:"space-between"}}>
+            <h3>
+              Total
+            </h3>
+            <h3>
+              GHC200
+            </h3>
+          </div>
         </Modal.Body>
         <Modal.Footer
         style={{justifyContent:"center"}}
         >
-          <Button variant="success">Place Order</Button>
+          <Button variant="success" onClick={orderHandler}>Place Order</Button>
         </Modal.Footer>
       </Modal>
 
