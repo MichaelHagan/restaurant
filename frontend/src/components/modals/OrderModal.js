@@ -168,7 +168,13 @@ const calculateTotal = () =>{
             <h5>{info.name}</h5>
             <h5>{info.number}</h5>
           </div>
-          
+        <div className='modal-list-element'>
+        <div className='container'>
+        <p className='quantity' style={{fontSize:"12px", fontWeight:"650"}}>QTY</p>
+        <p className='name' style={{fontSize:"12px", fontWeight:"650"}}>FOOD</p>
+        </div>
+        <p className='total' style={{fontSize:"12px", fontWeight:"650"}}>TOTAL</p>
+      </div>
           {orders.map(order=>{
               return <div key={order.id}>
               <ModalListElement 

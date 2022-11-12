@@ -3,7 +3,7 @@ import './OrderModal.scss'
 
 const ModalListElement = ({name,quantity,total}) => {
   return (
-    <div id='modal-list-element'>
+    <div className='modal-list-element'>
         <div className='container'>
         <p className='quantity'>{quantity}</p>
         <p className='name'>{name}</p>
