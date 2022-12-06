@@ -1,0 +1,3 @@
+list databases - \l
+list tables - \dt
+connect to db - psql -d restaurant_db -U postgres

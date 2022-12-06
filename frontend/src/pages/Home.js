@@ -44,7 +44,7 @@ const Home = () => {
 
   const updateQuantity = (id,effect) =>{
     for(let i=0;i<selectedfoods.length;i++){
-      if(id == selectedfoods[i].id){
+      if(id === selectedfoods[i].id){
         effect?selectedfoods[i].quantity++ : selectedfoods[i].quantity--;
       }
     }
@@ -67,7 +67,7 @@ const Home = () => {
 }
 
   const removeSelected = (id) =>{
-    setSelectedfoods(selectedfoods.filter(el=>el.id!=id));
+    setSelectedfoods(selectedfoods.filter(el=>el.id!==id));
   }
 
   const clearOrders = () =>{

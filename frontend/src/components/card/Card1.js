@@ -1,22 +1,3 @@
-// import React from 'react';
-// import './Card.scss';
-
-// const Card = () => {
-//   return (
-
-//     <div id='card-main'>
-//         <img src='food.jpg'/>
-//         <p>
-//          Food Text
-//         </p>
-//     </div>
-  
-//   )
-// }
-
-// export default Card
-
-
 import Card from 'react-bootstrap/Card';
 import './Card.scss';
 
