@@ -16,7 +16,8 @@ const CategoryList = ({ Category, List, selectHandler }) => {
             id:food.id,
             name:food.name,
             desc:food.description,
-            price:food.price
+            price:food.price,
+            available:food.available
           }
         ) }
         >
@@ -25,6 +26,7 @@ const CategoryList = ({ Category, List, selectHandler }) => {
           name = {food.name}
           desc = {food.description}
           price = {food.price}
+          available = {food.available}
           />
         </div>
       ))}

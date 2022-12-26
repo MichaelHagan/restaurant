@@ -43,6 +43,7 @@ useEffect(() => {
   }
 
   const addSelected = (selected) =>{
+
   let notexist=true; 
   
   selectedfoods.forEach(element => {
@@ -51,7 +52,7 @@ useEffect(() => {
     }
   });  
     
-  if(notexist){
+  if(notexist && selected.available){
     setSelectedfoods([...selectedfoods, {...selected, quantity:1}])
   }
 

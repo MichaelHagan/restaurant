@@ -4,7 +4,29 @@ $red : #CD104D;
 $purple : #9C2C77;
 
 #card-main{
-    .card{
+ position: relative;
+    .overlay{
+        border-radius: 5px;
+        position: relative;
+        height: 275px;
+        width: 13rem;
+        opacity: .5;
+        &:hover{ 
+            
+            cursor: not-allowed;
+            h5{
+                width: 100%;
+                position: absolute;
+                bottom:1px;
+                display: block;
+
+            }
+            
+        }
+
+    }
+
+    .card{  
     height: auto;
     width: 13rem;
     min-width: 4rem;
@@ -12,9 +34,13 @@ $purple : #9C2C77;
     flex-direction: column;
     margin: 1rem 0;
     img{
-
+        
     }
     
+    h5{
+    display: none;      
+    }
+
     p{
         color: gray;
     }

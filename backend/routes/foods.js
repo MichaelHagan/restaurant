@@ -59,7 +59,7 @@ try{
       req.query._order === "ASC" ? foods.sort((a,b)=>a[collumn] - b[collumn]) : foods.sort((a,b)=>b[collumn] - a[collumn]);
       foods = foods.slice(req.query._start,req.query._end);
     }
-    else{
+    else if(collumn !== undefined){
       foods.sort((a,b)=>compare(a[collumn],b[collumn],req.query._order));
       foods = foods.slice(req.query._start,req.query._end);
     }

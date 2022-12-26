@@ -59,7 +59,7 @@ router.get('/', async(req, res)=> {
         req.query._order === "ASC" ? fees.sort((a,b)=>a[collumn] - b[collumn]) : fees.sort((a,b)=>b[collumn] - a[collumn]);
         fees = fees.slice(req.query._start,req.query._end);
       }
-      else{
+      else if(collumn !== undefined){
         fees.sort((a,b)=>compare(a[collumn],b[collumn],req.query._order));
         fees = fees.slice(req.query._start,req.query._end);
       }
@@ -120,7 +120,7 @@ router.post('/',async(req,res)=>{
   router.delete('/:id',async(req,res)=>{
     try{
       let{
-      location
+      id
     }=req.params;
   
     const row = await Fee.findOne({
