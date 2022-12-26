@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
-const Food = require('../models/foods')
+const Food = require('../models/foods');
 
 
 
@@ -18,9 +18,52 @@ router.get('/authenticate', async function(req, res, next) {
 
 //Get all foods
 router.get('/', async(req, res)=> {
-  try{
+
+const compare = (a,b,sort)=>{
+if(a!== null && b!== null){
+let first = a.split(' ').join('').toLowerCase();
+let second = b.split(' ').join('').toLowerCase();
+
+if(sort === 'ASC'){
+
+  if(first>second)
+  {
+    return 1
+  }else{
+    return -1
+  }
+
+}else{
+  if(first>second)
+  {
+    return -1
+  }else{
+    return 1
+  }
+}
+}
+}
+
+try{
+  let collumn = req.query._sort;
+
   Food.findAll()
   .then(foods=> {
+    res.header( 'Access-Control-Expose-Headers', 'X-Total-Count');
+    res.header('X-Total-Count',`${foods.length}`);
+
+    if(collumn === "id"){
+      req.query._order === "ASC" ? foods.sort((a,b)=>parseInt(a[collumn]) - parseInt(b[collumn])) : foods.sort((a,b)=>parseInt(b[collumn]) - parseInt(a[collumn]));
+      foods = foods.slice(req.query._start,req.query._end);
+    }else if(collumn === "price"||collumn === "createdAt" || collumn === "updatedAt"|| collumn === "available"){
+      req.query._order === "ASC" ? foods.sort((a,b)=>a[collumn] - b[collumn]) : foods.sort((a,b)=>b[collumn] - a[collumn]);
+      foods = foods.slice(req.query._start,req.query._end);
+    }
+    else{
+      foods.sort((a,b)=>compare(a[collumn],b[collumn],req.query._order));
+      foods = foods.slice(req.query._start,req.query._end);
+    }
+
     res.send(foods);
 })
   .catch(err=>{
@@ -42,8 +85,7 @@ router.get('/:id',async(req,res)=>{
    const row = await Food.findOne({
      where: { id: id },
    });
- 
-   res.send(row);
+   res.json(row);
  }catch(e){
    res.send(e)
  }
@@ -51,7 +93,7 @@ router.get('/:id',async(req,res)=>{
  })
 
 //Add food
-router.post('/add',async(req,res)=>{
+router.post('/',async(req,res)=>{
 
   let { 
     name, 
@@ -79,19 +121,20 @@ router.post('/add',async(req,res)=>{
 })
 
 //Delete food
-router.delete('/delete',async(req,res)=>{
+router.delete('/:id',async(req,res)=>{
   try{
     let{
-    name
-  }=req.body
+     id
+   }=req.params;
 
   const row = await Food.findOne({
-    where: { name: name },
+    where: { id: id },
   });
   
   if (row) {
     await row.destroy(); // deletes the row
-    res.send(`Entry for ${row.name} deleted succesfully.`)
+    res.json(row)
+    console.log(`Entry for ${row.name} deleted succesfully.`);
   }else{
     res.send('Food does not exist.')
   }
@@ -102,10 +145,7 @@ router.delete('/delete',async(req,res)=>{
 )
 
 //Update food
-router.put('/update/:id',async(req,res)=>{
-
-  //Chose not to use food name as identifier this time considering the fact that user might change food name.
-  //Rather use food name in front end to get food id, use id then as identifier
+router.put('/:id',async(req,res)=>{
 
   try {
     const { id } = req.params;
@@ -128,20 +168,20 @@ router.put('/update/:id',async(req,res)=>{
             check = false;
             let key = collumns[i];
             const value = req.body[key];
-            const update = await Food.update(
+            await Food.update(
               { [key]: value }, 	// attribute
               { where: {id: id} }			// condition
             );
 
             output_str += `Food ${key} was updated with value ${value}\n`;
-            console.log(update);
         }
     }
 
     if (check) {
         res.send("Attribute passed does not exist or null attribute passed")
     } else {
-        res.send(output_str);
+        console.log(output_str);
+        res.json(req.body);
     }
 
 } catch (e) {

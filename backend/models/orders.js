@@ -32,6 +32,4 @@ allowNull:false
 }
 );
 
-//order time was removed, created_at will handle that.
-
 module.exports = order;

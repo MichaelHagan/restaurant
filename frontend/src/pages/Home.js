@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import SideBar from '../components/sidebar/SideBar';
 import SearchBar from '../components/search/SearchBar';
@@ -12,24 +13,14 @@ const Home = () => {
   const [bl, setbl] = useState(true);
   const [heading, setHeading] = useState("");
   const [sidebar,setSidebar] = useState(false);
-  const [foodlist,setFoodlist] = useState([
-  {id:1,name:"Rice",desc:"Nicely prepared",price:30},
-  {id:2,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:3,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:4,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:5,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:6,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:7,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:8,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:9,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:10,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:11,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:12,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:13,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:14,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:15,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:16,name:"Rice Chicken",desc:"Nicely prepared",price:30},
-  {id:17,name:"Rice Chicken",desc:"Nicely prepared",price:30}]);
+  const baseURL = "http://localhost:3050";
+  const [foodlist,setFoodlist] = useState([]);
+
+useEffect(() => {
+  axios.get(baseURL+"/foods").then((response) => {
+    setFoodlist(response.data);
+  });
+}, []);
   
   const [selectedfoods,setSelectedfoods] = useState([]);
 
@@ -74,7 +65,6 @@ const Home = () => {
   setSelectedfoods([]);
   }
 
-
   return (
     <div id="home-main">
       {sidebar&&<SideBar 
@@ -99,7 +89,7 @@ const Home = () => {
             onClick={()=>setbl(!bl)}>
             Back
           </Button>
-           <CategoryList Category={heading} List={foodlist} selectHandler={addSelected} />
+           <CategoryList Category={heading} List={foodlist.filter(el=>el.category===heading)} selectHandler={addSelected} />
           </div> 
            }
         </div>
