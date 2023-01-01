@@ -11,7 +11,9 @@ import {
   TextInput,
   useRecordContext,
   ReferenceField,
-  SelectInput
+  SelectInput,
+  BooleanInput,
+  BooleanField
 } from 'react-admin';
 
 export const OrderList = () => (
@@ -24,6 +26,8 @@ export const OrderList = () => (
             <NumberField source="total_price" />
             <ReferenceField source="DeliveryFeeId" reference="deliveries" label="Delivery"/>
             <TextField source="order_state" />
+            <BooleanField source="payment" />
+            <TextField source="payment_type" />
             <DateField source="createdAt" />
             <DateField source="updatedAt" />
         </Datagrid>
@@ -47,6 +51,13 @@ export const OrderEdit = () => (
               { id: 'Delivered', name: 'Delivered' }
               ]} 
             />
+            <SelectInput source="payment_type" choices={[
+              { id: 'Cash', name: 'Cash' },
+              { id: 'Cash Credit', name: 'Cash Credit' },
+              { id: 'Credit', name: 'Credit' }
+              ]} 
+            />
+            <BooleanInput source="payment" />
         </SimpleForm>
     </Edit>
 );
@@ -67,6 +78,14 @@ export const OrderCreate = () => (
               { id: 'Delivered', name: 'Delivered' }
               ]} 
             />
+            
+            <SelectInput source="payment_type" choices={[
+              { id: 'Cash', name: 'Cash' },
+              { id: 'Cash Credit', name: 'Cash Credit' },
+              { id: 'Credit', name: 'Credit' }
+              ]} 
+            />
+            <BooleanInput source="payment" />
       </SimpleForm>
   </Create>
 );

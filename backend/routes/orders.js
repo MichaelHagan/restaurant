@@ -57,7 +57,7 @@ if(sort === 'ASC'){
     if(collumn === "id" || collumn === "DeliveryFeeId"){
       req.query._order === "ASC" ? orders.sort((a,b)=>parseInt(a[collumn]) - parseInt(b[collumn])) : orders.sort((a,b)=>parseInt(b[collumn]) - parseInt(a[collumn]));
       orders = orders.slice(req.query._start,req.query._end);
-    }else if(collumn === "total_price"||collumn === "createdAt" || collumn === "updatedAt"){
+    }else if(collumn === "total_price"||collumn === "createdAt" || collumn === "updatedAt" || collumn === "payment"){
       req.query._order === "ASC" ? orders.sort((a,b)=>a[collumn] - b[collumn]) : orders.sort((a,b)=>b[collumn] - a[collumn]);
       orders = orders.slice(req.query._start,req.query._end);
     }
@@ -104,6 +104,8 @@ router.post('/',async(req,res)=>{
     customer_number,
     total_price,
     order_state,
+    payment,
+    payment_type,
     DeliveryFeeId
   } = req.body;
 
@@ -113,6 +115,8 @@ router.post('/',async(req,res)=>{
     customer_number,
     total_price,
     order_state,
+    payment,
+    payment_type,
     DeliveryFeeId
   }).then( order=>{
       res.send(order);
@@ -159,7 +163,9 @@ router.put('/:id',async(req,res)=>{
       "customer_name",
       "customer_number",
       "total_price",
-      "order_state"
+      "order_state",
+      "payment",
+      "payment_type",
     ]
 
     let check = true; //Will be used to res.send text if invalid or no collumn name is passed

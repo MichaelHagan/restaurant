@@ -87,14 +87,17 @@ const calculateTotal = () =>{
         customer_number:info.number,
         total_price:orderTotal,
         order_state:"New",
-        DeliveryFeeId:info.deliveryFeeId
+        DeliveryFeeId:info.deliveryFeeId,
+        payment:false,
+        payment_type:"Cash",
+
       })
       .then((response) => {
         if(response.statusText === 'OK'){
             status = true;
         }
 
-        console.log("status: ",response.status," statusText: ",response.statusText);
+        // console.log("status: ",response.status," statusText: ",response.statusText);
 
         if(status){
           Swal.fire({

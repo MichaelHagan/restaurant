@@ -1,0 +1,8 @@
+-Check if page is in main or sub cat (use bl).
+-If page is in main filter whole arraylist to retrieve foods with name like text.
+-If page is in sub cat, filter by cat and filter resultant arraylist by text in search.
+
+
+
+#NB-Add sorting functionality to sort by price.(Functionality already exists pass in collumn
+name and _sort(ASC/DESC))
