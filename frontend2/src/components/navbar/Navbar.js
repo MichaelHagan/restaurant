@@ -25,7 +25,7 @@ function Navbar() {
   return (
       <div className={shadow ? 'w-full h-[80px] z-10 bg-zinc-100 fixed drop-shadow-lg' : 'w-full h-[80px] z-10 bg-zinc-100 fixed'}
       >
-          <div className='flex justify-between mx-auto items-center w-full h-full px-2 2xl:px-16'>
+          <div className='max-w-[1240px] flex justify-between mx-auto items-center w-full h-full px-2 2xl:px-16'>
               <a href="/">
               <img src={logo} alt="logo" width="100" height="100" className='' />
               </a>

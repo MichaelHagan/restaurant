@@ -15,7 +15,7 @@ const Header = ({ handleClick, count }) => {
       <div className='max-w-[1240px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full relative'>
         <div className='lg:text-white'>
           <h2 className='text-4xl'>Discover the best meals</h2>
-          <p className=' text-center py-6'>The best meals at affordable price</p>
+          <p className=' text-center py-6'>The best meals at affordable prices</p>
         </div>
         <div className='col-span-2 w-full h-auto'>
           <div className='p-4'>
