@@ -1,4 +1,0 @@
-#FD841F orange light
-#E14D2A	orange deep
-#CD104D red
-#9C2C77 purple
