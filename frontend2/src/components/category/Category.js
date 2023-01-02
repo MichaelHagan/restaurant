@@ -11,7 +11,7 @@ function Category({handleClick}) {
     <div id="category" className='w-full h-screen'>
       <div className='max-w-[1240px] m-auto flex flex-col justify-center w-full px-2 py-24'>
         <div>
-          <p className="text-3xl text-slate-600 font-bold inline border-b-4 border-yellow-300"> Food categories</p>
+          <p className="text-3xl text-gray-600 font-bold inline border-b-4 border-yellow-300"> Food categories</p>
         </div>
         <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4 text-center py-8">
           <CategoryCard
@@ -33,7 +33,7 @@ function Category({handleClick}) {
           <CategoryCard
             image={dessert}
             title="Dessert"
-            description="This is breakfast"
+            description="This is Dessert"
           />
         </div>
       </div>    

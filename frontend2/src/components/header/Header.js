@@ -1,5 +1,5 @@
 import React from 'react'
-import image from "../../images/background-min.jpg"
+import image from "../../images/background.jpg"
 import { HiOutlineChevronDoubleDown } from "react-icons/hi"
 import {FaSearch} from "react-icons/fa"
 import Trigger from '../sidetrigger/Trigger'
@@ -8,7 +8,7 @@ import Trigger from '../sidetrigger/Trigger'
 
 const Header = ({ handleClick, count }) => {
   return (
-    <div className='w-full h-screen'>
+    <div id="header" className='w-full h-screen'>
       <div className='hidden lg:flex flex-col w-full h-screen  bg-gray-900/90 absolute'>
         <img className='w-full h-full mix-blend-overlay' src={image} alt="support" />
       </div>

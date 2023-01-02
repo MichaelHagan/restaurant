@@ -16,7 +16,7 @@ body {
 }
 
 html, body{
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
 }
 
 ::-webkit-scrollbar {
