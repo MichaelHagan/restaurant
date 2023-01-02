@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
+const order = require('./orders');
 
 const delivery_fee = db.define('Delivery_Fee',{
 id:{
@@ -25,5 +26,7 @@ defaultValue: true
   tableName:'delivery_fees'  
 }
 );
+delivery_fee.hasMany(order)
+
 
 module.exports = delivery_fee;

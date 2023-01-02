@@ -26,12 +26,19 @@ allowNull:false
 order_state:{
 type:Sequelize.STRING,
 allowNull:false
+},
+payment:{
+  type:Sequelize.BOOLEAN,
+  allowNull:false,
+  default:false
+},
+payment_type:{
+  type:Sequelize.STRING,
+  allowNull:false
 }
 },{
   tableName:'orders'  
 }
 );
-
-//order time was removed, created_at will handle that.
 
 module.exports = order;

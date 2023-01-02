@@ -4,9 +4,10 @@ import Card from '../card/Card1';
 
 
 const CategoryList = ({ Category, List, selectHandler }) => {
+
   return (
     <div id="categorylist-main">
-     <h2>{Category}</h2>    
+     <h2>{Category}</h2>  
      <div className="list-body">
       {List.map((food) => (
         <div key={food.id} 
@@ -14,16 +15,18 @@ const CategoryList = ({ Category, List, selectHandler }) => {
           {
             id:food.id,
             name:food.name,
-            desc:food.desc,
-            price:food.price
+            desc:food.description,
+            price:food.price,
+            available:food.available
           }
         ) }
         >
           <Card
           id = {food.id}
           name = {food.name}
-          desc = {food.desc}
+          desc = {food.description}
           price = {food.price}
+          available = {food.available}
           />
         </div>
       ))}
