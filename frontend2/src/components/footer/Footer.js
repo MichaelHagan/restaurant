@@ -10,18 +10,16 @@ const Footer = () => {
           <p>Order Me.<br />Providing good food</p>
         </div>
         <div>
-          <span className="footer-title">Services</span>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
+          <span className="footer-title">Quick Links</span>
+          <a href='/#home' className="link link-hover">Home</a>
+          <a href='/#category' className="link link-hover">Categories</a>
+          <a href="/#about" className="link link-hover">About</a>
+          <a href="/#contact" className="link link-hover">Contact</a>
         </div>
         <div>
-          <span className="footer-title">Company</span>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
+          <span className="footer-title">Social Media</span>
+          <a className="link link-hover">Facebook</a>
+          <a className="link link-hover">Instagram</a>
         </div>
         <div>
           <span className="footer-title">Legal</span>
