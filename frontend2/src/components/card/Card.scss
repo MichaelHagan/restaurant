@@ -1,0 +1,32 @@
+$orange-light : #FD841F;
+$orange-deep : #E14D2A;
+$red : #CD104D;
+$purple : #9C2C77;
+
+#card-main{
+    .card{
+    height: auto;
+    width: 18rem;
+    min-width: 4rem;
+    display: flex;
+    flex-direction: column;
+    
+    // margin: 1rem 0;
+    img{
+
+    }
+    
+    p{
+        color: gray;
+    }
+    &:hover{ 
+        
+        cursor: pointer;
+        background-color: lightgray;
+
+        img{
+
+        }
+    }
+}
+}
