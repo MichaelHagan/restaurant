@@ -1,16 +1,13 @@
 import React from 'react'
 import image from "../../images/background.jpg"
 import { HiOutlineChevronDoubleDown } from "react-icons/hi"
-import {FaSearch} from "react-icons/fa"
-import Trigger from '../sidetrigger/Trigger'
-
 
 
 const Header = ({ handleClick, count }) => {
   return (
-    <div id="header" className='w-full h-screen'>
-      <div className='hidden lg:flex flex-col w-full h-screen  bg-gray-900/90 absolute'>
-        <img className='w-full h-full mix-blend-overlay' src={image} alt="support" />
+    <div id="home" className='w-full h-screen'>
+      <div className='lg:flex flex-col w-full h-screen bg-gray-900/90 absolute'>
+        <img className='w-full h-full object-cover mix-blend-overlay' src={image} alt="support" />
       </div>
       <div className='max-w-[1240px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full relative'>
         <div className='lg:text-white'>

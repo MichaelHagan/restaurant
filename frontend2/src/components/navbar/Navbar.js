@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import logo from "../../images/logo.png"
+import { FaShoppingCart } from 'react-icons/fa'
+import Trigger from '../sidetrigger/Trigger'
 
 
 function Navbar() {
@@ -26,22 +28,29 @@ function Navbar() {
       <div className={shadow ? 'w-full h-[80px] z-10 bg-zinc-100 fixed drop-shadow-lg' : 'w-full h-[80px] z-10 bg-zinc-100 fixed'}
       >
           <div className='max-w-[1240px] flex justify-between mx-auto items-center w-full h-full px-2 2xl:px-16'>
-              <a href="/">
+              <a href="/#home">
               <img src={logo} alt="logo" width="100" height="100" className='' />
               </a>
               <div>
                   <ul className='hidden md:flex text-black'>
 
-                      <a href="/">
+                      <a href="/#home">
                           <li className='ml-10 text-sm  uppercase border-b-2 cursor-pointer hover:border-yellow-400'>Home</li>
                       </a>
-                      <a href="/#meals" smooth={true} duration={300}>
-                          <li className='ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>Meals</li>
+                      <a href="/#about" smooth={true} duration={300}>
+                          <li className='ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>About</li>
                       </a>
-                      <a href="/#about">
-                          <li className='ml-10 text-sm uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>About</li>
+                      <a href="/#meals">
+                          <li className='ml-10 text-sm uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>Meals</li>
                       </a>
-                      
+                      <a href="/#contact" smooth={true} duration={300}>
+                          <li className='ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>Contact</li>
+                      </a>
+                      <a href='/'>
+                          <p className='ml-10'>
+                              <Trigger/>
+                          </p>
+                      </a>
                   </ul>
                   <div onClick={handleOpen} className='md:hidden'>
                       <AiOutlineMenu size={25} />
@@ -55,7 +64,8 @@ function Navbar() {
                       <div className='flex w-full items-center justify-between'>
                           <a href="/">
                               <img src={logo} alt="logo" width="100" height="100" className='' />
-                          </a>                          <div onClick={handleOpen} className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'>
+                          </a>
+                          <div onClick={handleOpen} className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'>
                               <AiOutlineClose size={25} />
                           </div>
                       </div>
@@ -65,14 +75,9 @@ function Navbar() {
                   </div>
                   <div className="py-4 flex flex-col">
                       <ul className='uppercase text-black'>
-                          <a href="/">
+                          <a href="/#home">
                               <li onClick={() => setNav(false)} className="py-4 text-sm ">
                                   Home
-                              </li>
-                          </a>
-                          <a href="/#meals">
-                              <li onClick={() => setNav(false)} className="py-4 text-sm">
-                                  Meals
                               </li>
                           </a>
                           <a href="/#about">
@@ -80,15 +85,25 @@ function Navbar() {
                                   About
                               </li>
                           </a>
-                          
-                      </ul>
-                  
+                          <a href="/#meals">
+                              <li onClick={() => setNav(false)} className="py-4 text-sm">
+                                  Meals
+                              </li>
+                          </a>
+                          <a href="/#contact">
+                              <li onClick={() => setNav(false)} className="py-4 text-sm">
+                                  Contact
+                              </li>
+                          </a>
+                          <a href='/'>
+                              <p className='py-4'><FaShoppingCart size={20} /></p>
+                          </a>                         
+                      </ul>                  
                   </div>
               </div>
-
-          </div>
-         
-      </div>  )
+          </div>       
+      </div>
+  )
 }
 
 export default Navbar

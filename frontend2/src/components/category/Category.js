@@ -36,7 +36,7 @@ function Category({handleClick}) {
             description="This is Dessert"
           />
         </div>
-      </div>    
+      </div>   
     </div>
   )
 }
