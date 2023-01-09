@@ -22,18 +22,21 @@ function Category({handleClick}) {
           />
           <CategoryCard
             image={continental}
-            title="Continental Foods"
+            title="Continental"
             description="Continental something"
+            handleClick={handleClick}
           />
           <CategoryCard
             image={local}
-            title="Local Foods"
+            title="Local"
             description="Local Something"
+            handleClick={handleClick}
           />
           <CategoryCard
             image={dessert}
             title="Dessert"
             description="This is Dessert"
+            handleClick={handleClick}
           />
         </div>
       </div>   

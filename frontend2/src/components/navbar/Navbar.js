@@ -5,7 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import Trigger from '../sidetrigger/Trigger'
 
 
-function Navbar() {
+function Navbar({count}) {
 
     const [nav, setNav] = useState(false)
     const [shadow, setShadow] = useState(false)
@@ -48,7 +48,7 @@ function Navbar() {
                       </a>
                       <a href='/'>
                           <p className='ml-10'>
-                              <Trigger/>
+                              <Trigger count={count}/>
                           </p>
                       </a>
                   </ul>

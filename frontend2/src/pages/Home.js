@@ -4,9 +4,11 @@ import Button from 'react-bootstrap/Button';
 import SideBar from '../components/sidebar/SideBar';
 import SearchBar from '../components/search/SearchBar';
 import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
 import Category from '../components/category/Category';
 import CategoryList from '../components/categorylist/CategoryList';
+import About from '../components/about/About';
+import Footer from '../components/footer/Footer';
+import Contact from '../components/contact/Contact';
 import './Home.scss';
 import Navbar  from '../components/navbar/Navbar';
 
@@ -69,24 +71,21 @@ useEffect(() => {
 
   return (
   
-    <div id="home-main">
+    <div>
       {sidebar&&<SideBar 
       List={selectedfoods} 
       remove={removeSelected} 
       updateQuantity={updateQuantity}
       clearOrders = {clearOrders}
       />}
-      <div className="main-page">
-        <Navbar />
-        <Header handleClick={showSide} count={selectedfoods.length} />
-        <div className="body">
-          {/* <SearchBar /> */}
+      <div>
+        <Navbar count={selectedfoods.length}/>
           {bl? 
-          <div className="categories">
-            <Category handleClick={handleClick} title={"Breakfast"} background="./images/breakfast.png" description="this is a description" />
-              <Category handleClick={handleClick} title={"Dessert"} background="./images/breakfast.png" description="this is a description" />
-              <Category handleClick={handleClick} title={"Local"} background="./images/breakfast.png" description="this is a description" />
-              <Category handleClick={handleClick} title={"Continental"} background="./images/breakfast.png" description="this is a description" />
+          <div>
+            <Header handleClick={showSide} count={selectedfoods.length} />
+            <Category handleClick={handleClick} />
+            <About />
+            <Contact />
           </div>:
           <div> 
           <Button variant="outline-secondary"
@@ -96,8 +95,7 @@ useEffect(() => {
            <CategoryList Category={heading} List={foodlist.filter(el=>el.category===heading)} selectHandler={addSelected} />
           </div> 
            }
-        </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
      </div>
   );
