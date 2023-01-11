@@ -79,10 +79,10 @@ useEffect(() => {
       clearOrders = {clearOrders}
       />}
       <div>
-        <Navbar count={selectedfoods.length}/>
+        <Navbar handleClick={showSide} count={selectedfoods.length}/>
           {bl? 
           <div>
-            <Header handleClick={showSide} count={selectedfoods.length} />
+            <Header />
             <Category handleClick={handleClick} />
             <About />
             <Contact />
