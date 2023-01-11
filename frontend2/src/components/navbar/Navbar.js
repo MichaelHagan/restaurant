@@ -3,9 +3,10 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import logo from "../../images/logo.png"
 import { FaShoppingCart } from 'react-icons/fa'
 import Trigger from '../sidetrigger/Trigger'
+import './Navbar.scss'
 
 
-function Navbar({count}) {
+function Navbar({count , goBack}) {
 
     const [nav, setNav] = useState(false)
     const [shadow, setShadow] = useState(false)
@@ -28,10 +29,10 @@ function Navbar({count}) {
       <div className={shadow ? 'w-full h-[80px] z-10 bg-zinc-100 fixed drop-shadow-lg' : 'w-full h-[80px] z-10 bg-zinc-100 fixed'}
       >
           <div className='max-w-[1240px] flex justify-between mx-auto items-center w-full h-full px-2 2xl:px-16'>
-              <a href="/#home">
+              <div className='cursor-pointer' onClick={()=>{goBack()}}>
               <img src={logo} alt="logo" width="100" height="100" className='' />
-              </a>
-              <div>
+              </div>
+              <div className='md:flex list-container'>
                   <ul className='hidden md:flex text-black'>
 
                       <a href="/#home">
@@ -46,12 +47,13 @@ function Navbar({count}) {
                       <a href="/#contact" smooth={true} duration={300}>
                           <li className='ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>Contact</li>
                       </a>
-                      <a href='/'>
+                  </ul>
+                    <div className='text-black cart'>
                           <p className='ml-10'>
                               <Trigger count={count}/>
                           </p>
-                      </a>
-                  </ul>
+                    </div>
+
                   <div onClick={handleOpen} className='md:hidden'>
                       <AiOutlineMenu size={25} />
                   </div>
