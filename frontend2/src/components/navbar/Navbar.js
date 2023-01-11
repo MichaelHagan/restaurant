@@ -5,7 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import Trigger from '../sidetrigger/Trigger'
 
 
-function Navbar({count}) {
+function Navbar({count , goBack}) {
 
     const [nav, setNav] = useState(false)
     const [shadow, setShadow] = useState(false)
@@ -28,9 +28,9 @@ function Navbar({count}) {
       <div className={shadow ? 'w-full h-[80px] z-10 bg-zinc-100 fixed drop-shadow-lg' : 'w-full h-[80px] z-10 bg-zinc-100 fixed'}
       >
           <div className='max-w-[1240px] flex justify-between mx-auto items-center w-full h-full px-2 2xl:px-16'>
-              <a href="/#home">
+              <div className='cursor-pointer' onClick={()=>{goBack()}}>
               <img src={logo} alt="logo" width="100" height="100" className='' />
-              </a>
+              </div>
               <div>
                   <ul className='hidden md:flex text-black'>
 

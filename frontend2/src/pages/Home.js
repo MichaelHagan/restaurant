@@ -69,6 +69,10 @@ useEffect(() => {
   setSelectedfoods([]);
   }
 
+  const goBack=()=>{
+    setbl(true);
+  }
+
   return (
   
     <div>
@@ -79,7 +83,7 @@ useEffect(() => {
       clearOrders = {clearOrders}
       />}
       <div>
-        <Navbar handleClick={showSide} count={selectedfoods.length}/>
+        <Navbar handleClick={showSide} goBack={goBack} count={selectedfoods.length}/>
           {bl? 
           <div>
             <Header />
