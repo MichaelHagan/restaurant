@@ -1,11 +1,6 @@
-$orange-light : #FD841F;
-$orange-deep : #E14D2A;
-$red : #CD104D;
-$purple : #9C2C77;
 
-#card-main{
- position: relative;
-    .overlay{
+ 
+.overlay{
         border-radius: 5px;
         position: relative;
         height: 275px;
@@ -26,33 +21,4 @@ $purple : #9C2C77;
 
     }
 
-    .card{  
-    height: auto;
-    width: 18rem;
-    min-width: 4rem;
-    display: flex;
-    flex-direction: column;
-    
-    // margin: 1rem 0;
-    img{
-        
-    }
-    
-    h5{
-    display: none;      
-    }
-
-    p{
-        color: gray;
-    }
-    &:hover{ 
-        
-        cursor: pointer;
-        background-color: lightgray;
-
-        img{
-
-        }
-    }
-}
-}
+  

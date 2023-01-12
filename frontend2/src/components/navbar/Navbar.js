@@ -3,7 +3,6 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import logo from "../../images/logo.png"
 import { FaShoppingCart } from 'react-icons/fa'
 import Trigger from '../sidetrigger/Trigger'
-import './Navbar.scss'
 
 
 function Navbar({count , goBack}) {
@@ -32,7 +31,7 @@ function Navbar({count , goBack}) {
               <div className='cursor-pointer' onClick={()=>{goBack()}}>
               <img src={logo} alt="logo" width="100" height="100" className='' />
               </div>
-              <div className='md:flex list-container'>
+              <div className='md:flex'>
                   <ul className='hidden md:flex text-black'>
 
                       <a href="/#home">
@@ -47,12 +46,12 @@ function Navbar({count , goBack}) {
                       <a href="/#contact" smooth={true} duration={300}>
                           <li className='ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400'>Contact</li>
                       </a>
-                  </ul>
-                    <div className='text-black cart'>
+                    <a className='text-black'>
                           <p className='ml-10'>
                               <Trigger count={count}/>
                           </p>
-                    </div>
+                    </a>
+                  </ul>
 
                   <div onClick={handleOpen} className='md:hidden'>
                       <AiOutlineMenu size={25} />

@@ -9,7 +9,7 @@ import CategoryList from '../components/categorylist/CategoryList';
 import About from '../components/about/About';
 import Footer from '../components/footer/Footer';
 import Contact from '../components/contact/Contact';
-import './Home.scss';
+// import './Home.scss';
 import Navbar  from '../components/navbar/Navbar';
 
 const Home = () => {
