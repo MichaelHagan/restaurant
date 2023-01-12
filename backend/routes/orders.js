@@ -66,7 +66,7 @@ if(sort === 'ASC'){
       orders = orders.slice(req.query._start,req.query._end);
     }
     res.send(orders);
-})
+  })
   .catch(err=>{
     console.log(err)
     res.send("Error")

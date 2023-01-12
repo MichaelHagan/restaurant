@@ -14,15 +14,17 @@ import {
   TextInput,
   ReferenceInput,
   SimpleList,
-  SelectInput 
+  SelectInput,
+  maxLength
 } from 'react-admin';
 
 import { useMediaQuery } from "@mui/material"
+const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)"); 
+const validateDescription = maxLength(60, "Maximum number of characters exceeded.(max:60 characters)"); 
 
 export const FoodList = () => {
 
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"))
-    
+  const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <List>
         {isSmall ? (
@@ -34,9 +36,9 @@ export const FoodList = () => {
         ) : (
           <Datagrid rowClick="edit">
               <TextField source="id" />
-              <TextField source="name" />
+              <TextField source="name"   />
               <TextField source="description" />
-              <TextField source="imageUrl" />
+              <TextField source="imageUrl"  />
               <NumberField source="price" />
               <BooleanField source="available" />
               <TextField source="category" />
@@ -53,8 +55,8 @@ export const FoodEdit = () => (
     <Edit title={<FoodTitle />}>
         <SimpleForm>
             <TextInput source="id" disabled/>
-            <TextInput source="name" />
-            <TextInput source="description" multiline rows={5}/>
+            <TextInput source="name" validate={validateName} />
+            <TextInput source="description" multiline rows={5} validate={validateDescription}/>
             <TextInput source="imageUrl" />
             <NumberInput source="price" />
             <BooleanInput source="available" />
@@ -72,8 +74,8 @@ export const FoodEdit = () => (
 export const FoodCreate = () => (
   <Create>
         <SimpleForm>
-            <TextInput source="name" />
-            <TextInput source="description" />
+        <TextInput source="name" validate={validateName} />
+            <TextInput source="description" multiline rows={2} validate={validateDescription}/>
             <TextInput source="imageUrl" />
             <NumberInput source="price" />
             <SelectInput source="category" choices={[
