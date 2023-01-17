@@ -26,7 +26,9 @@ export const FoodList = () => {
 
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
-    <List>
+    <List 
+    filters={foodFilters}
+    >
         {isSmall ? (
           <SimpleList
             primaryText={(record) => record.name}

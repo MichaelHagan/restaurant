@@ -1,14 +1,13 @@
-import { Admin, Resource, ListGuesser, EditGuesser } from "react-admin";
+import { Admin, Resource } from "react-admin";
 import { FoodList, FoodEdit, FoodCreate } from "./components/foods/Foods";
 import {OrderList, OrderEdit, OrderCreate} from "./components/orders/Orders";
 import PaymentsIcon from '@mui/icons-material/Payments';
 import { DeliveryList,DeliveryEdit,DeliveryCreate } from "./components/deliveries/Deliveries";
-import restProvider from "ra-data-simple-rest";
 import Provider from "ra-data-json-server"
 import FoodIcon from "@mui/icons-material/FoodBank";
 import OrderIcon from "@mui/icons-material/DeliveryDining";
-import { Dashboard } from "./components/dashboard/Dashboard";
-import { authProvider } from './authProvider';
+// import { Dashboard } from "./components/dashboard/Dashboard";
+// import { authProvider } from './authProvider';
 import './App.scss';
 
 const dataProvider = Provider('http://localhost:3050');
