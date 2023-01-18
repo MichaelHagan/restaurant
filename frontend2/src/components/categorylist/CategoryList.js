@@ -12,6 +12,7 @@ const CategoryList = ({ Category, List, selectHandler }) => {
           {Category}
         </h2>
         </div>
+        {List.length?
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center py-8">
           {List.map((food) => (
             <div key={food.id}
@@ -34,7 +35,11 @@ const CategoryList = ({ Category, List, selectHandler }) => {
               />
             </div>
           ))}
+        </div>:
+        <div>
+          Leiit me duuit for yeewwww......  
         </div>
+        }
       </div>
     </div>
   );
