@@ -10,11 +10,14 @@ import CategoryList from '../components/categorylist/CategoryList';
 import './Home.scss';
 
 const Home = () => {
+  const baseURL = "http://localhost:3050";
   const [bl, setbl] = useState(true);
   const [heading, setHeading] = useState("");
   const [sidebar,setSidebar] = useState(false);
-  const baseURL = "http://localhost:3050";
   const [foodlist,setFoodlist] = useState([]);
+  const [selectedfoods,setSelectedfoods] = useState([]);
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchFoodList,setsearchFoodList] = useState([]);
 
 useEffect(() => {
   axios.get(baseURL+"/foods").then((response) => {
@@ -22,7 +25,7 @@ useEffect(() => {
   });
 }, []);
   
-  const [selectedfoods,setSelectedfoods] = useState([]);
+  
 
   const handleClick = (bool,header) =>{
     setbl(bool);
@@ -66,6 +69,12 @@ useEffect(() => {
   setSelectedfoods([]);
   }
 
+  const search = (search) =>{
+    let trimmedVal = search.replace(" ", "").toLowerCase().trim();
+    if(trimmedVal){setIsSearch(true)}
+    setsearchFoodList(foodlist.filter(el=>el.name.replace(" ", "").toLowerCase().includes(trimmedVal)));
+  }
+
   return (
     <div id="home-main">
       {sidebar&&<SideBar 
@@ -77,7 +86,6 @@ useEffect(() => {
       <div className="main-page">
         <Header handleClick={showSide} count={selectedfoods.length} />
         <div className="body">
-          <SearchBar />
           {bl? 
           <div className="categories">
             <Category handleClick={handleClick} title={"Breakfast"} background={"breakfast"} />
@@ -90,7 +98,8 @@ useEffect(() => {
             onClick={()=>setbl(!bl)}>
             Back
           </Button>
-           <CategoryList Category={heading} List={foodlist.filter(el=>el.category===heading)} selectHandler={addSelected} />
+           <SearchBar Search={search} />
+           <CategoryList Category={heading} List={isSearch? searchFoodList.filter(el=>el.category===heading):foodlist.filter(el=>el.category===heading)} selectHandler={addSelected} />
           </div> 
            }
         </div>
