@@ -1,4 +1,4 @@
-import { Admin, Resource } from "react-admin";
+import { fetchUtils, Admin, Resource } from "react-admin";
 import { FoodList, FoodEdit, FoodCreate } from "./components/foods/Foods";
 import {OrderList, OrderEdit, OrderCreate} from "./components/orders/Orders";
 import PaymentsIcon from '@mui/icons-material/Payments';
@@ -7,14 +7,23 @@ import Provider from "ra-data-json-server"
 import FoodIcon from "@mui/icons-material/FoodBank";
 import OrderIcon from "@mui/icons-material/DeliveryDining";
 // import { Dashboard } from "./components/dashboard/Dashboard";
-// import { authProvider } from './authProvider';
+import { authProvider } from './authProvider';
 import './App.scss';
 
-const dataProvider = Provider('http://localhost:3050');
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+      options.headers = new Headers({ Accept: 'application/json' });
+  }
+  const  token  = localStorage.getItem('auth');
+  options.headers.set('authorization', `Bearer ${token}`);
+  return fetchUtils.fetchJson(url, options);
+};
+
+const dataProvider = Provider('http://localhost:3050', httpClient);
 
 const App = () => (
    <Admin 
-  //  authProvider={authProvider} 
+   authProvider={authProvider} 
    dataProvider={dataProvider} 
   //  dashboard={Dashboard}
    >

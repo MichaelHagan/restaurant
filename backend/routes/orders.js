@@ -1,24 +1,22 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../config/database');
 const Order = require('../models/orders');
+const jwt = require('jsonwebtoken');
 
 
 
-router.get('/authenticate', async function(req, res, next) {
-    try {
-        await db.authenticate();
-        console.log('Connection has been established successfully.');
-        res.send("success");
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-        res.send("error");
-      }
-      
-});
+function authenticate(req,res,next){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if(token == null) return res.status(401).json("Unauthorized");
+  jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err)=>{
+    if(err) return res.status(403).send()
+    next();
+  })
+}
 
 //Get all orders
-router.get('/', async(req, res)=> {
+router.get('/', authenticate, async(req, res)=> {
 
 const compare = (a,b,sort)=>{
 if(a!== null && b!== null){
@@ -78,7 +76,7 @@ if(sort === 'ASC'){
 });
 
 //Get single order
-router.get('/:id',async(req,res)=>{
+router.get('/:id',authenticate,async(req,res)=>{
  try{
    let{
     id
@@ -96,7 +94,7 @@ router.get('/:id',async(req,res)=>{
 })
 
 //Add order
-router.post('/',async(req,res)=>{
+router.post('/', async(req,res)=>{
 
   let { 
     details, 
@@ -128,7 +126,7 @@ router.post('/',async(req,res)=>{
 })
 
 //Delete order
-router.delete('/:id',async(req,res)=>{
+router.delete('/:id',authenticate, async(req,res)=>{
   try{
     let{
     id
@@ -152,7 +150,7 @@ router.delete('/:id',async(req,res)=>{
 )
 
 //Update order
-router.put('/:id',async(req,res)=>{
+router.put('/:id', authenticate, async(req,res)=>{
 
   try {
     const { id } = req.params;

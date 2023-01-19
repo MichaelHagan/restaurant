@@ -25,3 +25,16 @@ connect to db - psql -d restaurant_db -U postgres
       "location":"Tema",
       "price":10
 }
+
+
+{
+   "name":"Spizz", 
+   "email":"Hello@test.com",
+   "superAdmin":false,
+   "password":"password"
+}
+
+{
+   "email":"Hello@test.com",
+   "password":"password"
+}

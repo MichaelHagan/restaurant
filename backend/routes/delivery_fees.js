@@ -1,19 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
 const Fee = require('../models/deliveries');
+const jwt = require('jsonwebtoken');
 
 
-router.get('/authenticate', async function(req, res, next) {
-    try {
-        await db.authenticate();
-        console.log('Connection has been established successfully.');
-        res.send("success");
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-        res.send("error");
-      }
-  });
+function authenticate(req,res,next){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if(token == null) return res.status(401).json("Unauthorized");
+  jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err)=>{
+    if(err) return res.status(403).send();
+    next();
+  })
+}
 
 //Get all delivery_fees  
 router.get('/', async(req, res)=> {
@@ -95,7 +94,7 @@ router.get('/:id',async(req,res)=>{
   
 
 //Add delivery_fee
-router.post('/',async(req,res)=>{
+router.post('/', authenticate, async(req,res)=>{
 
     let { 
       location,
@@ -117,7 +116,7 @@ router.post('/',async(req,res)=>{
   })
   
   //Delete delivery_fee
-  router.delete('/:id',async(req,res)=>{
+  router.delete('/:id', authenticate, async(req,res)=>{
     try{
       let{
       id
@@ -141,7 +140,7 @@ router.post('/',async(req,res)=>{
   )
   
   //Update delivery_fee
-  router.put('/:id',async(req,res)=>{
+  router.put('/:id', authenticate, async(req,res)=>{
   
     //Chose not to use location as identifier this time considering the fact that user might change location.
     //Rather use location in front end to get delivery id, use id then as identifier
