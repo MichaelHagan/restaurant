@@ -1,0 +1,73 @@
+
+.img {
+  background: url(../../../public/images/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+.bg-img {
+  background: url(../../../public/images/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+.form-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100%;
+  padding: 3rem 0;
+  max-width: 500px;
+  padding: 16px;
+  background-color: #fcfcfc;
+  border-radius: 1rem;
+}
+.title {
+  text-align: center;
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.registration-form {
+  font-family: "Montserrat", sans-serif;
+}
+.signin {
+  padding: 1rem;
+  text-align: center;
+}
+.input-error {
+  color: red;
+  font-size: 1rem;
+}
+.link {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.link:hover {
+  color: #FFFFFF;
+}
+.btn-user {
+  position: absolute;
+  top: 55px;
+  right: 15rem;
+  z-index: 10;
+}
+.paginate p {
+  margin-bottom: 0;
+}
+.edit-icon {
+  /* margin: 2px; */
+  font-size: 0.5rem;
+}
+.lightModeIcon .css-78trlr-MuiButtonBase-root-MuiIconButton-root.Mui-disabled{
+  color: #333 !important;
+}
+.darkModeIcon .css-78trlr-MuiButtonBase-root-MuiIconButton-root.Mui-disabled{
+  color: #FFF !important;
+}

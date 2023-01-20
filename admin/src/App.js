@@ -3,6 +3,7 @@ import { SuperFoodList, FoodList, FoodEdit, FoodCreate } from "./components/food
 import {SuperOrderList, OrderList, OrderEdit, OrderCreate} from "./components/orders/Orders";
 import {AdminList, AdminEdit, AdminCreate} from "./components/admins/Admins";
 import PaymentsIcon from '@mui/icons-material/Payments';
+import LoginPage from "./components/login/LoginPage";
 import { SuperDeliveryList,DeliveryList,DeliveryEdit,DeliveryCreate } from "./components/deliveries/Deliveries";
 import Provider from "ra-data-json-server";
 import FoodIcon from "@mui/icons-material/FoodBank";
@@ -23,15 +24,14 @@ const httpClient = (url, options = {}) => {
 
 const superAdmin = localStorage.getItem('super');
 
-
-
 const dataProvider = Provider('http://localhost:3050', httpClient);
 
 const App = () => (
 
    <Admin 
    authProvider={authProvider} 
-   dataProvider={dataProvider} 
+   dataProvider={dataProvider}
+   loginPage={LoginPage} 
    dashboard={Dashboard}
    >
     {

@@ -2,10 +2,10 @@ import axios from "axios";
 
 export const authProvider = {
     // called when the user attempts to log in
-    login: async({ username, password }) =>  {
+    login: async({ email, password }) =>  {
       await axios.post('http://localhost:3050/admins/login', {
-        email: username,
-        password: password
+        email,
+        password
       })
       .then(response => {
         //Seems this if statement can be removed, check on it
@@ -15,7 +15,6 @@ export const authProvider = {
         localStorage.setItem('auth', response.data.accessToken);
         localStorage.setItem('name', response.data.name);
         localStorage.setItem('super',response.data.super);
-        window.location.reload();
         return Promise.resolve();
     })
     .catch((e) => {
