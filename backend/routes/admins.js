@@ -149,7 +149,7 @@ function authenticate(req,res,next){
         }
         const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
 
-        res.json({accessToken:accessToken});
+        res.json({accessToken:accessToken,name:row.name,super:row.superAdmin});
        }else{
         res.status(401).send(`Wrong Password`);
        }
@@ -185,7 +185,7 @@ function authenticate(req,res,next){
   )
   
   //Update admin
-  router.put('/:id',authenticate, async(req,res)=>{
+  router.put('/:id', authenticate, async(req,res)=>{
   
     try {
       const { id } = req.params;
@@ -206,10 +206,26 @@ function authenticate(req,res,next){
               check = false;
               let key = collumns[i];
               const value = req.body[key];
+              
+              if(key=="password"){
+              //skip password update if password is unchanged
+                const user = await Admin.findOne({
+                  where: { id: id },
+                });
+                if(user.password === value)continue;
+
+                let hashedPassword = await bcrypt.hash(value,10); //hash password
+
+                await Admin.update(
+                  { [key]: hashedPassword }, 	// attribute
+                  { where: {id: id} }			// condition
+                );
+              }else{
               await Admin.update(
                 { [key]: value }, 	// attribute
                 { where: {id: id} }			// condition
               );
+              }
   
               output_str += `Admin ${key} was updated with value ${value}\n`;
           }

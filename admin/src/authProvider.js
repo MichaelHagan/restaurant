@@ -13,6 +13,9 @@ export const authProvider = {
             throw new Error(response.data);
         }
         localStorage.setItem('auth', response.data.accessToken);
+        localStorage.setItem('name', response.data.name);
+        localStorage.setItem('super',response.data.super);
+        window.location.reload();
         return Promise.resolve();
     })
     .catch((e) => {
@@ -22,6 +25,8 @@ export const authProvider = {
     // called when the user clicks on the logout button
     logout: () => {
       localStorage.removeItem("auth");
+      localStorage.removeItem("name");
+      localStorage.removeItem("super");
       return Promise.resolve();
     },
     // called when the API returns an error

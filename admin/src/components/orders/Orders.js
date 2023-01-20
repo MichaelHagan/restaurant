@@ -18,7 +18,9 @@ import {
 
 export const OrderList = () => (
     <List>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="edit"
+        bulkActionButtons={false}
+        >
             <TextField source="id" />
             <TextField source="details" />
             <TextField source="customer_name" />
@@ -35,6 +37,25 @@ export const OrderList = () => (
 );
 
 
+export const SuperOrderList = () => (
+  <List>
+      <Datagrid rowClick="edit">
+          <TextField source="id" />
+          <TextField source="details" />
+          <TextField source="customer_name" />
+          <TextField source="customer_number" />
+          <NumberField source="total_price" />
+          <ReferenceField source="DeliveryFeeId" reference="deliveries" label="Delivery"/>
+          <TextField source="order_state" />
+          <BooleanField source="payment" />
+          <TextField source="payment_type" />
+          <DateField source="createdAt" />
+          <DateField source="updatedAt" />
+      </Datagrid>
+  </List>
+);
+
+
 export const OrderEdit = () => (
     <Edit title={<OrderTitle />}>
         <SimpleForm>
@@ -48,7 +69,8 @@ export const OrderEdit = () => (
               { id: 'Preparing', name: 'Preparing' },
               { id: 'Awaiting Pickup', name: 'Awaiting Pickup' },
               { id: 'On Delivery', name: 'On Delivery' },
-              { id: 'Delivered', name: 'Delivered' }
+              { id: 'Delivered', name: 'Delivered' },
+              { id: 'Cancelled', name: 'Cancelled' }
               ]} 
             />
             <SelectInput source="payment_type" choices={[

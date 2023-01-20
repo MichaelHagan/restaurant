@@ -16,6 +16,21 @@ import {
 
 export const DeliveryList = () => (
     <List>
+        <Datagrid rowClick="edit"
+        bulkActionButtons={false}
+        >
+            <TextField source="id" />
+            <TextField source="location" />
+            <NumberField source="price" />
+            <BooleanField source="available" />
+            <DateField source="createdAt" />
+            <DateField source="updatedAt" />
+        </Datagrid>
+    </List>
+);
+
+export const SuperDeliveryList = () => (
+    <List>
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <TextField source="location" />

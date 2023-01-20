@@ -22,11 +22,11 @@ import { useMediaQuery } from "@mui/material"
 const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)"); 
 const validateDescription = maxLength(60, "Maximum number of characters exceeded.(max:60 characters)"); 
 
-export const FoodList = () => {
+export const SuperFoodList = () => {
 
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
-    <List 
+    <List
     filters={foodFilters}
     >
         {isSmall ? (
@@ -51,6 +51,38 @@ export const FoodList = () => {
     </List>
     )
         };
+
+        export const FoodList = () => {
+
+          const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+          return (
+            <List 
+            filters={foodFilters}
+            >
+                {isSmall ? (
+                  <SimpleList
+                    primaryText={(record) => record.name}
+                    secondaryText={(record) => record.description}
+                    tertiaryText={(record) => record.price}
+                  />
+                ) : (
+                  <Datagrid rowClick="edit"
+                    bulkActionButtons={false}
+                  >
+                      <TextField source="id" />
+                      <TextField source="name"   />
+                      <TextField source="description" />
+                      <TextField source="imageUrl"  />
+                      <NumberField source="price" />
+                      <BooleanField source="available" />
+                      <TextField source="category" />
+                      <DateField source="createdAt" />
+                      <DateField source="updatedAt" />
+                  </Datagrid>
+                   )}
+            </List>
+            )
+                };
 
 
 export const FoodEdit = () => (
