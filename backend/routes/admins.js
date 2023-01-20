@@ -109,7 +109,7 @@ function authenticate(req,res,next){
 
     Admin.create({
         name, 
-        email,
+        email:email.toLowerCase(),
         superAdmin,
         password:hashedPassword,
     }).then( admin=>{
@@ -135,7 +135,7 @@ function authenticate(req,res,next){
        
        const row = await Admin.findOne({
          where: { 
-            email
+            email: email.toLowerCase()
         },
        });
 

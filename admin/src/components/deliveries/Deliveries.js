@@ -16,7 +16,7 @@ import {
 
 export const DeliveryList = () => (
     <List>
-        <Datagrid rowClick="edit"
+        <Datagrid
         bulkActionButtons={false}
         >
             <TextField source="id" />
