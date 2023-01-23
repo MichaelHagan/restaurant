@@ -32,7 +32,7 @@
   text-align: center;
   padding-bottom: 1rem;
   font-size: 2rem;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .registration-form {
   font-family: "Montserrat", sans-serif;
@@ -70,8 +70,4 @@
 }
 .darkModeIcon .css-78trlr-MuiButtonBase-root-MuiIconButton-root.Mui-disabled{
   color: #FFF !important;
-}
-
-.form-label{
-  font-family: "Montserrat", sans-serif !important;
 }

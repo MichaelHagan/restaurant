@@ -7,7 +7,6 @@ import {
     NumberField,
     TextField,
     Edit,
-    Show,
     Create,
     BooleanInput,
     NumberInput,
