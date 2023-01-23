@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './LoginPage.css';
 import { useLogin, useNotify } from 'react-admin';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 
 
@@ -25,7 +26,15 @@ export default function LoginPage() {
   <div>
          <div className="bg-img"></div>
       <div className="form-container login">
-        <h1 className="title">Login</h1>
+        <div className='title' >
+        <LockPersonIcon fontSize='large' style={{ color: '#0d6efd', 
+        border: '2px solid #0d6efd',
+        borderRadius:'50%',
+        height:'1.3em',
+        width:'1.3em',
+        padding:'5px' }}  />
+        <h5 style={{marginTop:'.7rem'}}>Admin Login</h5>
+        </div>
         <div className="registration-form row">
           <div className="col-md-12">
             <form onSubmit={handleSubmit} className="container">

@@ -1,52 +1,86 @@
-import { 
-    BooleanField, 
-    Datagrid, 
-    DateField, 
-    List, 
-    NumberField, 
+import {
+    BooleanField,
+    Datagrid,
+    SimpleList,
+    DateField,
+    List,
+    NumberField,
     TextField,
     Edit,
+    Show,
     Create,
-    BooleanInput, 
-    NumberInput, 
-    SimpleForm, 
+    BooleanInput,
+    NumberInput,
+    SimpleForm,
     TextInput,
     useRecordContext
-    } from 'react-admin';
+} from 'react-admin';
 
-export const DeliveryList = () => (
-    <List>
-        <Datagrid
-        bulkActionButtons={false}
-        >
-            <TextField source="id" />
-            <TextField source="location" />
-            <NumberField source="price" />
-            <BooleanField source="available" />
-            <DateField source="createdAt" />
-            <DateField source="updatedAt" />
-        </Datagrid>
-    </List>
-);
+import { useMediaQuery } from "@mui/material";
 
-export const SuperDeliveryList = () => (
-    <List>
-        <Datagrid rowClick="edit">
-            <TextField source="id" />
-            <TextField source="location" />
-            <NumberField source="price" />
-            <BooleanField source="available" />
-            <DateField source="createdAt" />
-            <DateField source="updatedAt" />
-        </Datagrid>
-    </List>
-);
+export const DeliveryList = () => {
+
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
+
+    return (
+        <List>
+            {isSmall ? (
+                <SimpleList
+                    primaryText={(record) => record.location}
+                    secondaryText={(record) => record.available}
+                    tertiaryText={(record) => record.price}
+                    linkType="show"
+                />
+            ) :
+                (
+                    <Datagrid
+                        bulkActionButtons={false}
+                    >
+                        <TextField source="id" />
+                        <TextField source="location" />
+                        <NumberField source="price" />
+                        <BooleanField source="available" />
+                        <DateField source="createdAt" />
+                        <DateField source="updatedAt" />
+                    </Datagrid>
+                )}
+        </List>
+    )
+};
+
+export const SuperDeliveryList = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
+
+    return (
+        <List>
+            {isSmall ? (
+                <SimpleList
+                    primaryText={(record) => record.location}
+                    secondaryText={(record) => record.available}
+                    tertiaryText={(record) => record.price}
+                />
+            ) :
+                (
+                    <Datagrid rowClick="edit">
+                        <TextField source="id" />
+                        <TextField source="location" />
+                        <NumberField source="price" />
+                        <BooleanField source="available" />
+                        <DateField source="createdAt" />
+                        <DateField source="updatedAt" />
+                    </Datagrid>
+                )}
+        </List>
+    )
+};
 
 
 export const DeliveryEdit = () => (
     <Edit title={<DeliveryTitle />}>
         <SimpleForm>
-            <TextInput source="id" disabled/>
+            <TextInput source="id" disabled />
             <TextInput source="location" />
             <NumberInput source="price" />
             <BooleanInput source="available" />
@@ -66,4 +100,4 @@ export const DeliveryCreate = () => (
 const DeliveryTitle = () => {
     const order = useRecordContext();
     return <span>{order ? `${order.location}` : ''}</span>;
-  };
+};

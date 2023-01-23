@@ -1,6 +1,6 @@
-import { fetchUtils, Admin, Resource } from "react-admin";
+import { fetchUtils, Admin, Resource, ShowGuesser } from "react-admin";
 import { SuperFoodList, FoodList, FoodEdit, FoodCreate } from "./components/foods/Foods";
-import {SuperOrderList, OrderList, OrderEdit, OrderCreate} from "./components/orders/Orders";
+import {SuperOrderList, OrderList,SuperOrderEdit ,OrderEdit, OrderCreate} from "./components/orders/Orders";
 import {AdminList, AdminEdit, AdminCreate} from "./components/admins/Admins";
 import PaymentsIcon from '@mui/icons-material/Payments';
 import LoginPage from "./components/login/LoginPage";
@@ -48,7 +48,7 @@ const App = () => (
     <Resource 
     name="orders" 
     list={SuperOrderList} 
-    edit={OrderEdit}  
+    edit={SuperOrderEdit}  
     create={OrderCreate} 
     icon={OrderIcon} 
     />
@@ -76,7 +76,8 @@ const App = () => (
     
     <Resource 
     name="foods" 
-    list={FoodList} 
+    list={FoodList}
+    show={ShowGuesser} 
     icon={FoodIcon} 
     />
 
@@ -91,6 +92,7 @@ const App = () => (
     <Resource 
     name="deliveries" 
     list={DeliveryList} 
+    show={ShowGuesser}
     options={{ label: 'Delivery Fees' }} 
     recordRepresentation="location"
     icon={PaymentsIcon} 

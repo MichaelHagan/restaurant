@@ -64,6 +64,7 @@ export const FoodList = () => {
           primaryText={(record) => record.name}
           secondaryText={(record) => record.description}
           tertiaryText={(record) => record.price}
+          linkType="show"
         />
       ) : (
         <Datagrid

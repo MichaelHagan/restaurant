@@ -45,10 +45,13 @@ const OrderModal = ({orders,clearOrders}) => {
 const generateDetails = () =>{
   let details = "";
   for(let i = 0; i<orders.length;i++){
-    details += detailString+`${orders[i].name} * ${orders[i].quantity}: ${orders[i].price * orders[i].quantity}, `;
+  details += `${orders[i].name} * ${orders[i].quantity}: ${orders[i].price * orders[i].quantity}, `;
   }
+
+  details += `Delivery: ${info.deliveryFee}, `;
   
-  details+= "Total"+ calculateTotal();
+  details += "Total: "+ calculateTotal();
+
   return details;
 
 }
