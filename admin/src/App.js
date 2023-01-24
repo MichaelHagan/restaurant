@@ -9,7 +9,7 @@ import { SuperDeliveryList,DeliveryList,DeliveryEdit,DeliveryCreate } from "./co
 import Provider from "ra-data-json-server";
 import FoodIcon from "@mui/icons-material/FoodBank";
 import OrderIcon from "@mui/icons-material/DeliveryDining";
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import GroupIcon from '@mui/icons-material/Group';
 import { Dashboard } from "./components/dashboard/Dashboard";
 import { authProvider } from './authProvider';
@@ -78,7 +78,7 @@ const App = () => (
     list={AdminList} 
     edit={AdminEdit}  
     create={AdminCreate}
-    icon={SupervisorAccountIcon} 
+    icon={AdminPanelSettingsIcon} 
     />
 
     </>:

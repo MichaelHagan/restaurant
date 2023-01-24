@@ -144,7 +144,7 @@ function authenticate(req,res,next){
         }
         const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
 
-        res.json({accessToken:accessToken,name:row.name,number:row.phone_number});
+        res.json({accessToken:accessToken,id:row.id,name:row.name,number:row.phone_number});
        }else{
         res.status(401).send(`Wrong Password`);
        }

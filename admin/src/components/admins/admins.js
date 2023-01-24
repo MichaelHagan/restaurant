@@ -15,7 +15,8 @@ import {
     useRecordContext 
 } from 'react-admin';
 
-import { useMediaQuery } from "@mui/material"
+
+import { useMediaQuery } from "@mui/material";
 
 export const AdminList = () => {
 

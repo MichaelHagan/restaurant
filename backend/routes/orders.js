@@ -75,6 +75,30 @@ if(sort === 'ASC'){
 }
 });
 
+
+//Get all orders for a given user
+router.get('/user/:userId',authenticate,async(req,res)=>{
+try{
+
+  let{
+    userId
+  }=req.params;
+
+  Order.findAll({
+    where: { userId },
+  }).then(orders=>{
+    res.send(orders);
+  }).catch(err=>{
+    console.log(err)
+    res.send("Error")
+  });
+
+}catch(e){
+  console.log(e);
+  res.send(e);
+}
+})
+
 //Get single order
 router.get('/:id',authenticate,async(req,res)=>{
  try{
