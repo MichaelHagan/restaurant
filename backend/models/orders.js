@@ -37,7 +37,7 @@ payment_type:{
   allowNull:false
 }
 },{
-  tableName:'orders'  
+  tableName:'orders',  
 }
 );
 

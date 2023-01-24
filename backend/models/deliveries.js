@@ -26,7 +26,7 @@ defaultValue: true
   tableName:'delivery_fees'  
 }
 );
-delivery_fee.hasMany(order)
+delivery_fee.hasMany(order);
 
 
 module.exports = delivery_fee;

@@ -2,6 +2,7 @@ import { fetchUtils, Admin, Resource, ShowGuesser } from "react-admin";
 import { SuperFoodList, FoodList, FoodEdit, FoodCreate } from "./components/foods/Foods";
 import {SuperOrderList, OrderList,SuperOrderEdit ,OrderEdit, OrderCreate} from "./components/orders/Orders";
 import {AdminList, AdminEdit, AdminCreate} from "./components/admins/Admins";
+import {UserList, UserEdit, UserCreate} from "./components/users/Users";
 import PaymentsIcon from '@mui/icons-material/Payments';
 import LoginPage from "./components/login/LoginPage";
 import { SuperDeliveryList,DeliveryList,DeliveryEdit,DeliveryCreate } from "./components/deliveries/Deliveries";
@@ -9,6 +10,7 @@ import Provider from "ra-data-json-server";
 import FoodIcon from "@mui/icons-material/FoodBank";
 import OrderIcon from "@mui/icons-material/DeliveryDining";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import GroupIcon from '@mui/icons-material/Group';
 import { Dashboard } from "./components/dashboard/Dashboard";
 import { authProvider } from './authProvider';
 import './App.scss';
@@ -61,6 +63,14 @@ const App = () => (
     options={{ label: 'Delivery Fees' }} 
     recordRepresentation="location"
     icon={PaymentsIcon} 
+    />
+
+    <Resource 
+    name="users" 
+    list={UserList} 
+    edit={UserEdit}  
+    create={UserCreate}
+    icon={GroupIcon} 
     />
 
     <Resource 

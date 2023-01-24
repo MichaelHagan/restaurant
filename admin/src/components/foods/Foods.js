@@ -27,7 +27,7 @@ export const SuperFoodList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <List
-      filters={foodFilters}
+      // filters={foodFilters}
     >
       {isSmall ? (
         <SimpleList
@@ -57,7 +57,7 @@ export const FoodList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <List
-      filters={foodFilters}
+      // filters={foodFilters}
     >
       {isSmall ? (
         <SimpleList
@@ -129,10 +129,10 @@ const FoodTitle = () => {
   return <span>{food ? `${food.name}` : ''}</span>;
 };
 
-const foodFilters = [
-  <TextInput source="q" label="Search" alwaysOn />,
-  <ReferenceInput source="category" label="Category" reference="category" />,
-];
+// const foodFilters = [
+//   <TextInput source="q" label="Search" alwaysOn />,
+//   <ReferenceInput source="category" label="Category" reference="foods/category" />,
+// ];
 
 /*
 

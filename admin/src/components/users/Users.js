@@ -5,8 +5,7 @@ import {
     DateField, 
     EmailField, 
     List, 
-    TextField, 
-    BooleanInput,
+    TextField,
     Edit,
     Create, 
     SimpleForm, 
@@ -17,7 +16,7 @@ import {
 
 import { useMediaQuery } from "@mui/material"
 
-export const AdminList = () => {
+export const UserList = () => {
 
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
@@ -26,14 +25,14 @@ export const AdminList = () => {
         <SimpleList
           primaryText={(record) => record.name}
           secondaryText={(record) => record.email}
-          tertiaryText={(record) => record.superAdmin}
+          tertiaryText={(record) => record.phone_number}
         />
       ) : (
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <TextField source="name" />
             <EmailField source="email" />
-            <BooleanField source="superAdmin" />
+            <BooleanField source="phone_number" />
             <DateField source="createdAt" />
             <DateField source="updatedAt" />
         </Datagrid>
@@ -42,30 +41,30 @@ export const AdminList = () => {
     )
 };
 
-export const AdminEdit = () => (
-    <Edit title={<AdminTitle />}>
+export const UserEdit = () => (
+    <Edit title={<UserTitle />}>
         <SimpleForm>
             <TextInput source="id" disabled/>
             <TextInput source="name" />
             <TextInput source="email" />
-            <BooleanInput source="superAdmin" />
+            <TextInput source="phone_number" />
             <PasswordInput source="password" />
         </SimpleForm>
     </Edit>
 );
 
-export const AdminCreate = () => (
+export const UserCreate = () => (
     <Create>
         <SimpleForm>
             <TextInput source="name" />
             <TextInput source="email" />
-            <BooleanInput source="superAdmin" />
+            <TextInput source="phone_number" />
             <PasswordInput source="password" />
         </SimpleForm>
     </Create>
 );
 
-const AdminTitle = () => {
-    const admin = useRecordContext();
-    return <span>{admin ? `${admin.name}` : ''}</span>;
+const UserTitle = () => {
+    const user = useRecordContext();
+    return <span>{user ? `${user.name}` : ''}</span>;
   };

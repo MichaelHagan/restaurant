@@ -72,6 +72,22 @@ try{
 }
 });
 
+// router.get('/category',(req,res,next)=>{
+
+//   try{
+//     res.json([
+//       {"category":"Breakfast"},
+//       {"category":"Lunch"},
+//       {"category":"Local"},
+//       {"category":"Continental"}
+//     ]);
+//   }catch(e){
+//     res.send(e.message)
+//   }
+
+// })
+
+
 //Get single food
 router.get('/:id',async(req,res)=>{
   try{

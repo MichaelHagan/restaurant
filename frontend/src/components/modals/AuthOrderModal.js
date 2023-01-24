@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import axios from "axios";
 import './OrderModal.scss';
 
-const OrderModal = ({orders,clearOrders}) => {
+const AuthOrderModal = ({orders,clearOrders}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,7 +15,28 @@ const OrderModal = ({orders,clearOrders}) => {
   const handleClose2 = () => setShow2(false);
   const [detailString, setdetailString] = useState("");
   const [deliveries, setDeliveries] = useState([]);
+  const [orderTotal, setOrderTotal] = useState(0);
+  const [info,setInfo] = useState({
+    "location":"Pick Up",
+    "deliveryFee":0,
+    "deliveryFeeId":4
+});
   const baseURL = "http://localhost:3050";
+
+
+    /*
+        const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+      options.headers = new Headers({ Accept: 'application/json' });
+  }
+  const  token  = localStorage.getItem('auth');
+  options.headers.set('authorization', `Bearer ${token}`);
+  return fetchUtils.fetchJson(url, options);
+};
+    */
+
+    const name = localStorage.getItem('name');
+    const number = localStorage.getItem('number');
 
   useEffect(() => {
     axios.get(baseURL+"/deliveries").then((response) => {
@@ -33,14 +54,6 @@ const OrderModal = ({orders,clearOrders}) => {
     setShow2(true);
   
   }
-
-  const [orderTotal, setOrderTotal] = useState(0);
-
-  const [info,setInfo] = useState({
-    "location":"Pick Up",
-    "deliveryFee":0,
-    "deliveryFeeId":4
-});
 
 const generateDetails = () =>{
   let details = "";
@@ -86,8 +99,8 @@ const calculateTotal = () =>{
     axios
       .post(baseURL+"/orders", {
         details:detailString, 
-        customer_name:info.name,
-        customer_number:info.number,
+        customer_name:name,
+        customer_number:number,
         total_price:orderTotal,
         order_state:"New",
         DeliveryFeeId:info.deliveryFeeId,
@@ -158,30 +171,10 @@ const calculateTotal = () =>{
       centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Order Information</Modal.Title>
+          <Modal.Title>Select Delivery Option</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                autoFocus
-                value={info.name}
-                onChange = { e => setFormInfo('name',e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="number">
-              <Form.Label>Phone Number</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder=""
-                value={info.number}
-                onChange = { e => setFormInfo('number',e.target.value)}
-              />
-            </Form.Group>
-
         <Form.Group controlId="delivery">
           <Form.Label>Delivery</Form.Label>
           <Form.Select
@@ -219,8 +212,8 @@ const calculateTotal = () =>{
         </Modal.Header>
         <Modal.Body style={{display:"flex", flexDirection:"column", alignContent:"center"}}>
           <div style={{display:"flex", justifyContent:"space-between"}}>
-            <h5>{info.name}</h5>
-            <h5>{info.number}</h5>
+            <h5>{name}</h5>
+            <h5>{number}</h5>
           </div>
         <div className='modal-list-element'>
         <div className='container'>
@@ -269,4 +262,4 @@ const calculateTotal = () =>{
   );
 }
 
-export default OrderModal;
+export default AuthOrderModal;

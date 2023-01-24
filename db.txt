@@ -38,3 +38,11 @@ connect to db - psql -d restaurant_db -U postgres
    "email":"Hello@test.com",
    "password":"password"
 }
+
+
+{
+   "name":"Spizz", 
+   "email":"Hello@test.com",
+   "phone_number":"0550038166",
+   "password":"password"
+}
