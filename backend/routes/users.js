@@ -125,14 +125,19 @@ function authenticate(req,res,next){
     try{
         let{
          email,
+         number,
          password
        }=req.body;
        
-       const row = await User.findOne({
+       const row = email? await User.findOne({
          where: { 
             email: email.toLowerCase()
         },
-       });
+       }):await User.findOne({
+        where: { 
+           phone_number:number
+       },
+      });
 
        if(!row){
         return res.status(400).send("User not found");
@@ -140,7 +145,8 @@ function authenticate(req,res,next){
 
        if(await bcrypt.compare(password, row.password)){
         const user = {
-          name:row.name
+          id: row.id,
+          name: row.name
         }
         const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
 

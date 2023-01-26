@@ -2,24 +2,29 @@ import axios from "axios";
 
 export const authProvider = {
     // called when the user attempts to log in
-    login: async({ email, password }) =>  {
-      await axios.post('http://localhost:3050/admins/login', {
-        email,
+    login: async({ emailorphone, password }) =>  {
+      try{
+      let isnum = /^[+]?\d+$/.test(emailorphone); //TODO: Add handler for 233 instances
+      let res = isnum? await axios.post('http://localhost:3050/admins/login', {
+        number:emailorphone,
         password
-      })
-      .then(response => {
+      }): await axios.post('http://localhost:3050/admins/login', {
+        email:emailorphone,
+        password
+      });
+
         //Seems this if statement can be removed, check on it
-        if (response.status < 200 || response.status >= 300) {
-            throw new Error(response.data);
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error(res.data);
         }
-        localStorage.setItem('auth', response.data.accessToken);
-        localStorage.setItem('name', response.data.name);
-        localStorage.setItem('super',response.data.super);
+        console.log(res);
+        localStorage.setItem('auth', res.data.accessToken);
+        localStorage.setItem('name', res.data.name);
+        localStorage.setItem('super',res.data.super);
         return Promise.resolve();
-    })
-    .catch((e) => {
-        throw new Error(e.response.data)
-    });
+      }catch(e){
+        console.log(e.message);
+      }
     },
     // called when the user clicks on the logout button
     logout: () => {

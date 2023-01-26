@@ -32,7 +32,7 @@ export const UserList = () => {
             <TextField source="id" />
             <TextField source="name" />
             <EmailField source="email" />
-            <BooleanField source="phone_number" />
+            <TextField source="phone_number" />
             <DateField source="createdAt" />
             <DateField source="updatedAt" />
         </Datagrid>

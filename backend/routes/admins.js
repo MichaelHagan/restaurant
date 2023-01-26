@@ -94,13 +94,14 @@ function authenticate(req,res,next){
    })
   
   //Add admin
-  router.post('/',authenticate, async(req,res)=>{
+  router.post('/', async(req,res)=>{
   
     try{
 
     let { 
       name, 
       email,
+      phone_number,
       superAdmin,
       password,
     } = req.body;
@@ -110,6 +111,7 @@ function authenticate(req,res,next){
     Admin.create({
         name, 
         email:email.toLowerCase(),
+        phone_number,
         superAdmin,
         password:hashedPassword,
     }).then( admin=>{
@@ -130,22 +132,28 @@ function authenticate(req,res,next){
     try{
         let{
          email,
+         number,
          password
        }=req.body;
        
-       const row = await Admin.findOne({
-         where: { 
-            email: email.toLowerCase()
-        },
-       });
+       const row = email? await Admin.findOne({
+        where: { 
+           email: email.toLowerCase()
+       },
+      }):await Admin.findOne({
+       where: { 
+          phone_number:number
+      },
+     });
 
        if(!row){
-        return res.status(400).send("User not found");
+        return res.status(400).send("Admin not found");
        }
 
        if(await bcrypt.compare(password, row.password)){
         const user = {
-          name:row.name
+          id: row.id,
+          name: row.name
         }
         const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
 
@@ -194,6 +202,7 @@ function authenticate(req,res,next){
       let collumns = [
         "name", 
         "email",
+        "phone_number",
         "superAdmin",
         "password",
       ]

@@ -26,13 +26,14 @@ export const AdminList = () => {
       {isSmall ? (
         <SimpleList
           primaryText={(record) => record.name}
-          secondaryText={(record) => record.email}
+          secondaryText={(record) => record.phone_number}
           tertiaryText={(record) => record.superAdmin}
         />
       ) : (
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <TextField source="name" />
+            <TextField source="phone_number" />
             <EmailField source="email" />
             <BooleanField source="superAdmin" />
             <DateField source="createdAt" />
@@ -49,6 +50,7 @@ export const AdminEdit = () => (
             <TextInput source="id" disabled/>
             <TextInput source="name" />
             <TextInput source="email" />
+            <TextField source="phone_number" />
             <BooleanInput source="superAdmin" />
             <PasswordInput source="password" />
         </SimpleForm>
@@ -60,6 +62,7 @@ export const AdminCreate = () => (
         <SimpleForm>
             <TextInput source="name" />
             <TextInput source="email" />
+            <TextField source="phone_number" />
             <BooleanInput source="superAdmin" />
             <PasswordInput source="password" />
         </SimpleForm>

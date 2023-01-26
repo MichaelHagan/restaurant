@@ -12,8 +12,10 @@ type:Sequelize.STRING,
 allowNull:false
 },
 email:{
-type:Sequelize.STRING,
-allowNull:false
+type:Sequelize.STRING
+},
+phone_number:{
+  type:Sequelize.STRING
 },
 superAdmin:{
 type:Sequelize.BOOLEAN,
