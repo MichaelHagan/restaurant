@@ -128,7 +128,7 @@ function authenticate(req,res,next){
   
   })
 
-  router.post('/login',async(req,res)=>{
+  router.post('/login', authenticate, async(req,res)=>{
     try{
         let{
          email,
