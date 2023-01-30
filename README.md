@@ -1,6 +1,6 @@
-# iPayroll
+# Order Me
 
-A Payroll Management System.
+A Food Ordering System.
 
 ## Table of contents
 

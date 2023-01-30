@@ -13,11 +13,11 @@ export const authProvider = {
         password
       });
 
-        //Seems this if statement can be removed, check on it
+        //TODO: Seems this if statement can be removed, check on it
         if (res.status < 200 || res.status >= 300) {
             throw new Error(res.data);
         }
-        console.log(res);
+
         localStorage.setItem('auth', res.data.accessToken);
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('super',res.data.super);
