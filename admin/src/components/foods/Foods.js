@@ -12,6 +12,8 @@ import {
   NumberInput,
   SimpleForm,
   TextInput,
+  ImageInput,
+  ImageField,
   ReferenceInput,
   SimpleList,
   SelectInput,
@@ -92,7 +94,9 @@ export const FoodEdit = () => (
       <TextInput source="id" disabled />
       <TextInput source="name" validate={validateName} />
       <TextInput source="description" multiline rows={5} validate={validateDescription} />
-      <TextInput source="imageUrl" />
+      <ImageInput source="imageUrl" label="Related pictures">
+      <ImageField source="src" title="title" />
+      </ImageInput>
       <NumberInput source="price" />
       <BooleanInput source="available" />
       <SelectInput source="category" choices={[
@@ -111,6 +115,9 @@ export const FoodCreate = () => (
     <SimpleForm>
       <TextInput source="name" validate={validateName} />
       <TextInput source="description" multiline rows={2} validate={validateDescription} />
+      <ImageInput source="imageUrl" label="Related pictures">
+      <ImageField source="src" title="title" />
+      </ImageInput>
       <TextInput source="imageUrl" />
       <NumberInput source="price" />
       <SelectInput source="category" choices={[

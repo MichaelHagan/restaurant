@@ -94,7 +94,7 @@ function authenticate(req,res,next){
    })
   
   //Add admin
-  router.post('/', async(req,res)=>{
+  router.post('/', authenticate, async(req,res)=>{
   
     try{
 
@@ -128,7 +128,7 @@ function authenticate(req,res,next){
   
   })
 
-  router.post('/login', authenticate, async(req,res)=>{
+  router.post('/login', async(req,res)=>{
     try{
         let{
          email,
