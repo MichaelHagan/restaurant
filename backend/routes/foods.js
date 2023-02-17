@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Food = require('../models/foods');
 const jwt = require('jsonwebtoken');
+const multer = require('multer')
+const upload = multer({ dest: '../public/uploads' })
+
 
 function authenticate(req,res,next){
   const authHeader = req.headers['authorization'];
@@ -158,8 +161,8 @@ router.delete('/:id', authenticate, async(req,res)=>{
 )
 
 //Update food
-router.put('/:id',authenticate, async(req,res)=>{
-
+router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
+  const data = req.body.data;
   try {
     const { id } = req.params;
     let output_str = "";
@@ -177,10 +180,10 @@ router.put('/:id',authenticate, async(req,res)=>{
 
     for (let i = 0; i < collumns.length; i++) {
 
-        if (req.body.hasOwnProperty(collumns[i])) {
+        if (data.hasOwnProperty(collumns[i])) {
             check = false;
             let key = collumns[i];
-            const value = req.body[key];
+            const value = data[key];
             await Food.update(
               { [key]: value }, 	// attribute
               { where: {id: id} }			// condition
@@ -194,11 +197,12 @@ router.put('/:id',authenticate, async(req,res)=>{
         res.send("Attribute passed does not exist or null attribute passed")
     } else {
         console.log(output_str);
-        res.json(req.body);
+        res.json(data);
     }
 
 } catch (e) {
     res.send(e.message)
+    console.log(e.message)
 }
 
 })
