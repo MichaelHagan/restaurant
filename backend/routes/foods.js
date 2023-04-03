@@ -3,7 +3,7 @@ const router = express.Router();
 const Food = require('../models/foods');
 const jwt = require('jsonwebtoken');
 const multer = require('multer')
-const upload = multer({ dest: '../public/uploads' })
+const upload = multer({ dest: './public/uploads' })
 
 
 function authenticate(req,res,next){
