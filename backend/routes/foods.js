@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Food = require('../models/foods');
 const jwt = require('jsonwebtoken');
+const multer = require('multer')
+const upload = multer({ dest: './public/uploads' })
+
 
 function authenticate(req,res,next){
   const authHeader = req.headers['authorization'];
@@ -158,8 +161,9 @@ router.delete('/:id', authenticate, async(req,res)=>{
 )
 
 //Update food
-router.put('/:id',authenticate, async(req,res)=>{
-
+router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
+  const data = req.body.data;
+  const imageData = req.file;
   try {
     const { id } = req.params;
     let output_str = "";
@@ -167,7 +171,6 @@ router.put('/:id',authenticate, async(req,res)=>{
     let collumns = [
       "name", 
       "description",
-      "imageUrl",
       "price",
       "available",
       "category"
@@ -175,30 +178,41 @@ router.put('/:id',authenticate, async(req,res)=>{
 
     let check = true; //Will be used to res.send text if invalid or no collumn name is passed
 
-    for (let i = 0; i < collumns.length; i++) {
+    for (const element of collumns) {
 
-        if (req.body.hasOwnProperty(collumns[i])) {
+        if (data.hasOwnProperty(element)) {
             check = false;
-            let key = collumns[i];
-            const value = req.body[key];
+            let key = element;
+            const value = data[key];
             await Food.update(
               { [key]: value }, 	// attribute
               { where: {id: id} }			// condition
             );
-
+            
             output_str += `Food ${key} was updated with value ${value}\n`;
         }
+    }
+
+    if(imageData){
+      check = false;
+      await Food.update(
+        { "imageUrl": imageData.filename},
+        { where: {id: id} }
+      );
+
+      output_str += `Food imageUrl was updated with value ${imageData.filename}\n`;
     }
 
     if (check) {
         res.send("Attribute passed does not exist or null attribute passed")
     } else {
         console.log(output_str);
-        res.json(req.body);
+        res.json(data);
     }
 
 } catch (e) {
     res.send(e.message)
+    console.log(e.message)
 }
 
 })

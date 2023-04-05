@@ -14,7 +14,6 @@ import {
   TextInput,
   ImageInput,
   ImageField,
-  ReferenceInput,
   SimpleList,
   SelectInput,
   maxLength
@@ -88,14 +87,16 @@ export const FoodList = () => {
 };
 
 
-export const FoodEdit = () => (
-  <Edit title={<FoodTitle />}>
+export const FoodEdit = () => {
+
+  return (
+    <Edit title={<FoodTitle />}>
     <SimpleForm>
       <TextInput source="id" disabled />
       <TextInput source="name" validate={validateName} />
       <TextInput source="description" multiline rows={5} validate={validateDescription} />
-      <ImageInput source="imageUrl" label="Related pictures">
-      <ImageField source="src" title="title" />
+      <ImageInput source="imageUrl" label="Food Picture">
+        <ImageField source="src" title="title" />
       </ImageInput>
       <NumberInput source="price" />
       <BooleanInput source="available" />
@@ -108,15 +109,16 @@ export const FoodEdit = () => (
       />
     </SimpleForm>
   </Edit>
-);
+  )
+};
 
 export const FoodCreate = () => (
   <Create>
     <SimpleForm>
       <TextInput source="name" validate={validateName} />
       <TextInput source="description" multiline rows={2} validate={validateDescription} />
-      <ImageInput source="imageUrl" label="Related pictures">
-      <ImageField source="src" title="title" />
+      <ImageInput source="imageUrl" label="Food Picture">
+        <ImageField source="src" title="title" />
       </ImageInput>
       <TextInput source="imageUrl" />
       <NumberInput source="price" />
