@@ -107,47 +107,27 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
-
-        // Define a custom method to handle image updates
     update: (resource, params) => {
-        try{
-        const formData = new FormData();
+        if (resource === 'foods') {
+            const formData = new FormData();
 
-        // Add the image to the form data if it has changed
-        if (params.data.imageUrl && params.data.imageUrl.rawFile instanceof File) {
-            console.log("Image present");
-            
-            formData.append('image', params.data.imageUrl.rawFile);
+            if (params.data.imageUrl && params.data.imageUrl.rawFile instanceof File) {
+                formData.append('image', params.data.imageUrl.rawFile);
+            }
+
+            const { imageUrl, ...otherParams } = params.data;
+
+            formData.append('data', JSON.stringify(otherParams));
+
+            return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+                method: 'PUT',
+                body: formData,
+            }).then(({ json }) => ({ data: json }));
+        } else {
+            return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(params.data),
+            }).then(({ json }) => ({ data: json }));
         }
-
-        // Remove the image property from the params object
-        const { imageUrl, ...otherParams } = params.data;
-
-        // Add the rest of the data to the form data
-        formData.append('data', JSON.stringify(otherParams));
-
-        // return fetchUtils.fetchJson(`${apiUrl}/${resource}/${params.id}`, {
-        //     method: 'PUT',
-        //     body: formData,
-        // });
-
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-        method: 'PUT',
-        body: formData,
-        })
-    }catch(e){
-        console.log("Here:", e);
     }
-    },
-    
-
-
-        // update: (resource, params) =>
-        // httpClient(`${apiUrl}/${resource}/${params.id}`, {
-        //     method: 'PUT',
-        //     body: JSON.stringify(params.data),
-        // }).then(({ json }) => ({ data: json })),
-
-
-
 });

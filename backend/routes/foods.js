@@ -163,7 +163,6 @@ router.delete('/:id', authenticate, async(req,res)=>{
 //Update food
 router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
   const data = req.body.data;
-  console.log("data: ",data);
   const imageData = req.file;
   try {
     const { id } = req.params;
