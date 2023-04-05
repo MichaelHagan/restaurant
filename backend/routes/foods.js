@@ -163,6 +163,8 @@ router.delete('/:id', authenticate, async(req,res)=>{
 //Update food
 router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
   const data = req.body.data;
+  console.log("data: ",data);
+  const imageData = req.file;
   try {
     const { id } = req.params;
     let output_str = "";
@@ -170,7 +172,6 @@ router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
     let collumns = [
       "name", 
       "description",
-      "imageUrl",
       "price",
       "available",
       "category"
@@ -178,19 +179,29 @@ router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
 
     let check = true; //Will be used to res.send text if invalid or no collumn name is passed
 
-    for (let i = 0; i < collumns.length; i++) {
+    for (const element of collumns) {
 
-        if (data.hasOwnProperty(collumns[i])) {
+        if (data.hasOwnProperty(element)) {
             check = false;
-            let key = collumns[i];
+            let key = element;
             const value = data[key];
             await Food.update(
               { [key]: value }, 	// attribute
               { where: {id: id} }			// condition
             );
-
+            
             output_str += `Food ${key} was updated with value ${value}\n`;
         }
+    }
+
+    if(imageData){
+      check = false;
+      await Food.update(
+        { "imageUrl": imageData.filename},
+        { where: {id: id} }
+      );
+
+      output_str += `Food imageUrl was updated with value ${imageData.filename}\n`;
     }
 
     if (check) {
