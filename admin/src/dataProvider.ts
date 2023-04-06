@@ -106,7 +106,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
                 })
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-
     update: (resource, params) => {
         if (resource === 'foods') {
             const formData = new FormData();
@@ -122,12 +121,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
             return httpClient(`${apiUrl}/${resource}/${params.id}`, {
                 method: 'PUT',
                 body: formData,
-            }).then(({ json }) => ({ data: json }));
+            }).then(({ json }) => ({ data: { id: params.id, ...json } }));
         } else {
             return httpClient(`${apiUrl}/${resource}/${params.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(params.data),
-            }).then(({ json }) => ({ data: json }));
+            }).then(({ json }) => ({ data: { id: params.id, ...json } }));
         }
     }
 });
