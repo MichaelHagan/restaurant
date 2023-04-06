@@ -106,7 +106,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
                 })
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-
     update: (resource, params) => {
         if (resource === 'foods') {
             const formData = new FormData();
