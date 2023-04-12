@@ -152,9 +152,16 @@ const calculateTotal = () =>{
   return (
     <div className='order-button'>
 
-      <Button variant="outline-secondary" onClick={handleShow}>Order</Button>
+      {/* <Button variant="outline-secondary" onClick={handleShow}>Order</Button> */}
+            <button
+                type="button"
+                className="bg-red-500 text-white rounded-xl p-4 mt-4 w-full text-lg"
+                onClick={handleShow}
+              >
+                Make Payment
+              </button>
 
-      <Modal show={show} onHide={handleClose}
+      <Modal  show={show}  onHide={handleClose}
       centered
       >
         <Modal.Header closeButton>

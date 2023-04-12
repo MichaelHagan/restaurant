@@ -21,7 +21,7 @@ import {
 
 import { useMediaQuery } from "@mui/material"
 const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)");
-const validateDescription = maxLength(60, "Maximum number of characters exceeded.(max:60 characters)");
+const validateDescription = maxLength(120, "Maximum number of characters exceeded.(max:60 characters)");
 
 export const SuperFoodList = () => {
 

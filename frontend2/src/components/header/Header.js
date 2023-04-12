@@ -11,8 +11,8 @@ const Header = ({ handleClick, count }) => {
       </div>
       <div className='max-w-[1240px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full relative'>
         <div className='lg:text-white'>
-          <h2 className='text-4xl'>Discover the best meals</h2>
-          <p className=' text-center py-6'>The best meals at affordable prices</p>
+          <h2 className='text-6xl'>Discover the best meals</h2>
+          <p className='text-2xl text-center py-6'>The best meals at affordable prices</p>
         </div>
         <div className='col-span-2 w-full h-auto'>
           <div className='p-4'>
@@ -31,7 +31,7 @@ const Header = ({ handleClick, count }) => {
           </div>
         </div> 
         <div className='flex justify-center mt-6'>
-          <a href="/#category">
+          <a href="/#meals">
             <div className="rounded-full shadow-md bg-black shadow-yellow-300 p-6 cursor-pointer hover:scale-110 ease-in duration-300">
               <HiOutlineChevronDoubleDown size={30} className="m-auto text-[#FDE047]" />
             </div>

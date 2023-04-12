@@ -12,7 +12,7 @@ const Footer = () => {
         <div>
           <span className="text-yellow-300 text-sm">Quick Links</span>
           <a href='/#home' className="link link-hover">Home</a>
-          <a href='/#category' className="link link-hover">Categories</a>
+          <a href='/#meals' className="link link-hover">Meals</a>
           <a href="/#about" className="link link-hover">About</a>
           <a href="/#contact" className="link link-hover">Contact</a>
         </div>

@@ -13,7 +13,7 @@ const CategoryList = ({ Category, List, selectHandler }) => {
         </h2>
         </div>
         {List.length?
-        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center py-8">
+        <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center py-8">
           {List.map((food) => (
             <div key={food.id}
               onClick={event => selectHandler(

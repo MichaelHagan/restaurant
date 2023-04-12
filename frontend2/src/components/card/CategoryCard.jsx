@@ -8,7 +8,7 @@ CategoryCard({image, title, description, handleClick}) {
           <div className="card-body">
               <h2 className="card-title text-gray-600">{title}</h2>
               <p className='text-left'>{description}</p>
-              <div className="card-actions justify-end">
+              <div className="justify-end flex">
                   <button onClick={()=> 
                   handleClick(false,title)
                   } className="btn btn-warning">View meals</button>
