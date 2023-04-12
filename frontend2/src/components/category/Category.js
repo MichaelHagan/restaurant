@@ -8,12 +8,12 @@ import dessert from "../../images/dessert-min.jpg"
 
 function Category({handleClick}) {
   return (
-    <div id="category" className='w-full h-screen'>
+    <div id="meals" className='w-full h-full'>
       <div className='max-w-[1240px] m-auto flex flex-col justify-center w-full px-2 py-24'>
         <div>
           <p className="text-3xl text-gray-600 font-bold inline border-b-4 border-yellow-300"> Food categories</p>
         </div>
-        <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4 text-center py-8">
+        <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-center py-8">
           <CategoryCard
             image={breakfast}
             title="Breakfast"
