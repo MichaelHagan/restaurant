@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import axios from "axios";
 import './OrderModal.scss';
 
-const OrderModal = ({orders,clearOrders}) => {
+const OrderModal = ({orders,clearOrders, total}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,8 +44,8 @@ const OrderModal = ({orders,clearOrders}) => {
 
 const generateDetails = () =>{
   let details = "";
-  for(let i = 0; i<orders.length;i++){
-  details += `${orders[i].name} * ${orders[i].quantity}: ${orders[i].price * orders[i].quantity}, `;
+  for(const element of orders){
+  details += `${element.name} * ${element.quantity}: ${element.price * element.quantity}, `;
   }
 
   details += `Delivery: ${info.deliveryFee}, `;
@@ -58,11 +58,6 @@ const generateDetails = () =>{
 
 
 const calculateTotal = () =>{
-  let total = 0;
-
-  for(let i = 0; i<orders.length;i++){
-    total += orders[i].price * orders[i].quantity;
-  }
 
   total += info.deliveryFee;
 
@@ -122,6 +117,8 @@ const calculateTotal = () =>{
             title: 'Sorry, something went wrong, please check your order and try again',
             showConfirmButton: true,
           })
+
+          console.log("Here:", status);
         }
       }).catch(e=>{
         Swal.fire({
@@ -130,15 +127,17 @@ const calculateTotal = () =>{
           title: 'Sorry, something went wrong, please check your connection and try again',
           showConfirmButton: true,
         })
+        
+        console.log("Here2:", status, "Error: ",e.message);
       });
 
   }
 
   const setDelivery=(location)=>{
     let selectedLocation;
-    for(let i=0;i<deliveries.length;i++){
-      if(deliveries[i].location === location){
-        selectedLocation = deliveries[i];
+    for(const element of deliveries){
+      if(element.location === location){
+        selectedLocation = element;
       }
     }
     
@@ -161,7 +160,7 @@ const calculateTotal = () =>{
                 Make Payment
               </button>
 
-      <Modal  show={show}  onHide={handleClose}
+    <Modal  show={show}  onHide={handleClose}
       centered
       >
         <Modal.Header closeButton>

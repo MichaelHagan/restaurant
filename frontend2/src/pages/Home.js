@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import SideBar from "../components/sidebar/SideBar";
 import SearchBar from "../components/search/SearchBar";
 import Header from "../components/header/Header";
 import Category from "../components/category/Category";
@@ -15,7 +14,6 @@ const Home = () => {
   const baseURL = "http://localhost:3050";
   const [bl, setbl] = useState(true);
   const [heading, setHeading] = useState("");
-  const [sidebar, setSidebar] = useState(false);
   const [foodlist, setFoodlist] = useState([]);
   const [selectedfoods, setSelectedfoods] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
@@ -32,14 +30,10 @@ const Home = () => {
     setHeading(header);
   };
 
-  const showSide = () => {
-    setSidebar(!sidebar);
-  };
-
   const updateQuantity = (id, effect) => {
-    for (let i = 0; i < selectedfoods.length; i++) {
-      if (id === selectedfoods[i].id) {
-        effect ? selectedfoods[i].quantity++ : selectedfoods[i].quantity--;
+    for (const element of selectedfoods) {
+      if (id === element.id) {
+        effect ? element.quantity++ : element.quantity--;
       }
     }
     setSelectedfoods([...selectedfoods]);
@@ -87,7 +81,6 @@ const Home = () => {
     <div>
       <div>
         <Navbar
-          handleClick={showSide}
           goBack={goBack}
           count={selectedfoods.length}
           List={selectedfoods}

@@ -23,7 +23,21 @@ const Cart = ({
     }
   };
 
-  const [showModal, setShowModal] = useState(false);
+  let calculateTotal = ()=>{
+
+    let temp = 0;
+
+  for(const element of List){
+    temp += element.price * element.quantity;
+  }
+  
+
+  return temp;
+
+}
+
+
+  // const [showModal, setShowModal] = useState(false);
 
   return (
     <div
@@ -89,12 +103,13 @@ const Cart = ({
           <div className="cart-bottom">
             <div className="total font-bold">
               <h3>Subtotal: </h3>
-              <h3>Ghc</h3>
+              <h3>Ghc {calculateTotal()}</h3>
             </div>
             <div className="cart-container">
                 <OrderModal
                   orders={List}
                   clearOrders={clearOrders}  
+                  total={calculateTotal()}
                 />
             </div>
           </div>

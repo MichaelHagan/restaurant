@@ -3,10 +3,12 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import logo from "../../images/logo.png";
 import { FaShoppingCart } from "react-icons/fa";
 import Trigger from "../sidetrigger/Trigger";
+import Cart from '../cart/Cart';
 
-function Navbar({ count, goBack, List, updateQuantity, remove }) {
+function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders }) {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
+  const [showCart, setShowCart] = useState(false)
   const handleOpen = () => {
     setNav(!nav);
   };
@@ -65,8 +67,15 @@ function Navbar({ count, goBack, List, updateQuantity, remove }) {
             </a>
             <a className="text-black">
               <p className="ml-10">
-                <Trigger count={count} List={List} updateQuantity={updateQuantity} remove={remove} details={count}/>
-              
+                <Trigger count={count} setShowCart={setShowCart}/>
+                {showCart && <Cart 
+                clearOrders={clearOrders} 
+                setShowCart={setShowCart} 
+                count={count} 
+                List={List} 
+                updateQuantity={updateQuantity} 
+                remove={remove} 
+                />}
               </p>
             </a>
           </ul>

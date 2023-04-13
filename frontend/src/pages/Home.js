@@ -35,9 +35,9 @@ const Home = () => {
   }
 
   const updateQuantity = (id, effect) => {
-    for (let i = 0; i < selectedfoods.length; i++) {
-      if (id === selectedfoods[i].id) {
-        effect ? selectedfoods[i].quantity++ : selectedfoods[i].quantity--;
+    for (const element of selectedfoods) {
+      if (id === element.id) {
+        effect ? element.quantity++ : element.quantity--;
       }
     }
     setSelectedfoods([...selectedfoods]);

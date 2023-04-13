@@ -44,8 +44,8 @@ const OrderModal = ({orders,clearOrders}) => {
 
 const generateDetails = () =>{
   let details = "";
-  for(let i = 0; i<orders.length;i++){
-  details += `${orders[i].name} * ${orders[i].quantity}: ${orders[i].price * orders[i].quantity}, `;
+  for(const element of orders){
+  details += `${element.name} * ${element.quantity}: ${element.price * element.quantity}, `;
   }
 
   details += `Delivery: ${info.deliveryFee}, `;
@@ -60,8 +60,8 @@ const generateDetails = () =>{
 const calculateTotal = () =>{
   let total = 0;
 
-  for(let i = 0; i<orders.length;i++){
-    total += orders[i].price * orders[i].quantity;
+  for(const element of orders){
+    total += element.price * element.quantity;
   }
 
   total += info.deliveryFee;
@@ -136,9 +136,9 @@ const calculateTotal = () =>{
 
   const setDelivery=(location)=>{
     let selectedLocation;
-    for(let i=0;i<deliveries.length;i++){
-      if(deliveries[i].location === location){
-        selectedLocation = deliveries[i];
+    for(const element of deliveries){
+      if(element.location === location){
+        selectedLocation = element;
       }
     }
     
