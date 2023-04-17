@@ -39,7 +39,7 @@ const OrderModal = ({orders,clearOrders, total}) => {
   const [info,setInfo] = useState({
     "location":"Pick Up",
     "deliveryFee":0,
-    "deliveryFeeId":4
+    "deliveryFeeId":1
 });
 
 const generateDetails = () =>{
@@ -154,7 +154,7 @@ const calculateTotal = () =>{
       {/* <Button variant="outline-secondary" onClick={handleShow}>Order</Button> */}
             <button
                 type="button"
-                className="bg-red-500 text-white rounded-xl p-4 mt-4 w-full text-lg"
+                className="bg-red-500 text-white rounded-xl p-2 mt-4 w-full text-lg"
                 onClick={handleShow}
               >
                 Make Payment

@@ -41,7 +41,7 @@ const Cart = ({
 
   return (
     <div
-      className="w-full bg-black/80 fixed top-0 right-0 z-20 transition delay-150 duration-300 ease-in-out"
+      className="w-full bg-black/40 fixed top-0 right-0 z-20 transition delay-150 duration-300 ease-in-out"
      
     >
       <div className="h-screen w-[600px] bg-white float-right p-12 relative">
@@ -60,7 +60,7 @@ const Cart = ({
             <h3 className="font-semibold text-xl">No food has been selected</h3>
           </div>
         )}
-        <div className="product-container">
+        <div className="product-container h-screen">
           {count >= 1 &&
             List.map((item) => (
               <div className="product" key={item?.id}>

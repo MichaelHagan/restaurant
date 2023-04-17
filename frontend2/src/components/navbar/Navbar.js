@@ -65,6 +65,7 @@ function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders }) {
                 Contact
               </li>
             </a>
+            
             <a className="text-black">
               <p className="ml-10">
                 <Trigger count={count} setShowCart={setShowCart}/>
@@ -144,12 +145,19 @@ function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders }) {
                   Contact
                 </li>
               </a>
-              <a href="/">
-                <p className="py-4">
-                  <FaShoppingCart size={20} />
-                
-                </p>
-              </a>
+              <span className="text-black">
+              <p className="ml-10">
+                <Trigger count={count} setShowCart={setShowCart}/>
+                {showCart && <Cart 
+                clearOrders={clearOrders} 
+                setShowCart={setShowCart} 
+                count={count} 
+                List={List} 
+                updateQuantity={updateQuantity} 
+                remove={remove} 
+                />}
+              </p>
+            </span>
             </ul>
           </div>
         </div>
