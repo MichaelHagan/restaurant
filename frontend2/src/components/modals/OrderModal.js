@@ -216,7 +216,7 @@ const calculateTotal = () =>{
       <Modal
         show={show2}
         onHide={handleClose2}
-        backdrop="static"
+        backdrop="true"
         keyboard={false}
         centered
       >
@@ -268,6 +268,9 @@ const calculateTotal = () =>{
         style={{justifyContent:"center"}}
         >
           <Button variant="success" onClick={orderHandler}>Place Order</Button>
+          <Button variant="secondary" onClick={handleClose2}>
+            Cancel
+          </Button>
         </Modal.Footer>
       </Modal>
 

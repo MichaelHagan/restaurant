@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import { GiFoodTruck } from "react-icons/gi";
@@ -35,9 +34,6 @@ const Cart = ({
   return temp;
 
 }
-
-
-  // const [showModal, setShowModal] = useState(false);
 
   return (
     <div
