@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import logo from "../../images/logo.png";
-import { FaShoppingCart } from "react-icons/fa";
 import Trigger from "../sidetrigger/Trigger";
 import Cart from '../cart/Cart';
 
