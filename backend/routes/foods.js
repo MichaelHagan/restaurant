@@ -109,16 +109,18 @@ router.get('/:id',async(req,res)=>{
  })
 
 //Add food
-router.post('/',async(req,res)=>{
+router.post('/',authenticate, upload.single('image'),async(req,res)=>{
+
+  const imageData = req.file;
+  let imageUrl = imageData.filename;
 
   let { 
     name, 
     description,
-    imageUrl,
     price,
     available,
     category
-  } = req.body;
+  } = JSON.parse(req.body.data);
 
   Food.create({
     name, 
@@ -162,8 +164,9 @@ router.delete('/:id', authenticate, async(req,res)=>{
 
 //Update food
 router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
-  const data = req.body.data;
+  const data = JSON.parse(req.body.data);
   const imageData = req.file;
+
   try {
     const { id } = req.params;
     let output_str = "";

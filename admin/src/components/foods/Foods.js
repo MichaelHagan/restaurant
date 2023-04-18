@@ -120,7 +120,6 @@ export const FoodCreate = () => (
       <ImageInput source="imageUrl" label="Food Picture">
         <ImageField source="src" title="title" />
       </ImageInput>
-      <TextInput source="imageUrl" />
       <NumberInput source="price" />
       <SelectInput source="category" choices={[
         { id: 'Breakfast', name: 'Breakfast' },

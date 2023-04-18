@@ -58,10 +58,11 @@ const generateDetails = () =>{
 
 
 const calculateTotal = () =>{
+  let temp = 0;
 
-  total += info.deliveryFee;
+  temp = total + info.deliveryFee;
 
-  return total;
+  return temp;
 
 }
 

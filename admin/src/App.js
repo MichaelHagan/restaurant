@@ -42,7 +42,7 @@ const App = () => (
     <Resource 
     name="foods" 
     list={SuperFoodList} 
-    edit={FoodEdit(dataProvider)} 
+    edit={FoodEdit} 
     create={FoodCreate} 
     icon={FoodIcon} 
     />
