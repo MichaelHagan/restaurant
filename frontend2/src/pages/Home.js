@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
 import SearchBar from "../components/search/SearchBar";
 import Header from "../components/header/Header";
 import Category from "../components/category/Category";
@@ -109,9 +108,6 @@ const Home = () => {
           </div>
         ) : (
           <div>
-            <Button variant="outline-secondary" onClick={() => setbl(!bl)}>
-              Back
-            </Button>
             <SearchBar Search={search} />
             <CategoryList
               Category={heading}

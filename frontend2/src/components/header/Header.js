@@ -3,7 +3,7 @@ import image from "../../images/background.jpg"
 import { HiOutlineChevronDoubleDown } from "react-icons/hi"
 
 
-const Header = ({ handleClick, count }) => {
+const Header = () => {
   return (
     <div id="home" className='w-full h-screen'>
       <div className='lg:flex flex-col w-full h-screen bg-gray-900/90 absolute'>
