@@ -20,9 +20,16 @@ const Home = () => {
   const [searchFoodList, setsearchFoodList] = useState([]);
 
   useEffect(() => {
+    const storedSelectedFoods = localStorage.getItem('selectedfoods');
+
     axios.get(baseURL + "/foods").then((response) => {
       setFoodlist(response.data);
     });
+
+    if (storedSelectedFoods) {
+      setSelectedfoods(JSON.parse(storedSelectedFoods));
+    }
+
   }, []);
 
   const handleClick = (bool, header) => {
@@ -30,13 +37,18 @@ const Home = () => {
     setHeading(header);
   };
 
+  const setSelectedFoodsHelper = (selectedfoods) => {
+    setSelectedfoods(selectedfoods);
+    localStorage.setItem('selectedfoods', JSON.stringify(selectedfoods));
+  }
+
   const updateQuantity = (id, effect) => {
     for (const element of selectedfoods) {
       if (id === element.id) {
         effect ? element.quantity++ : element.quantity--;
       }
     }
-    setSelectedfoods([...selectedfoods]);
+    setSelectedFoodsHelper([...selectedfoods]);
   };
 
   const addSelected = (selected) => {
@@ -49,16 +61,16 @@ const Home = () => {
     });
 
     if (notexist && selected.available) {
-      setSelectedfoods([...selectedfoods, { ...selected, quantity: 1 }]);
+      setSelectedFoodsHelper([...selectedfoods, { ...selected, quantity: 1 }]);
     }
   };
 
   const removeSelected = (id) => {
-    setSelectedfoods(selectedfoods.filter((el) => el.id !== id));
+    setSelectedFoodsHelper(selectedfoods.filter((el) => el.id !== id));
   };
 
   const clearOrders = () => {
-    setSelectedfoods([]);
+    setSelectedFoodsHelper([]);
   };
 
   const goBack = () => {
