@@ -209,11 +209,11 @@ function authenticate(req,res,next){
   
       let check = true; //Will be used to res.send text if invalid or no collumn name is passed
   
-      for (let i = 0; i < collumns.length; i++) {
+      for (const element of collumns) {
   
-          if (req.body.hasOwnProperty(collumns[i])) {
+          if (req.body.hasOwnProperty(element)) {
               check = false;
-              let key = collumns[i];
+              let key = element;
               const value = req.body[key];
               
               if(key=="password"){

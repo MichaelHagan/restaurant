@@ -29,11 +29,37 @@ const Home = () => {
       setSelectedfoods(JSON.parse(storedSelectedFoods));
     }
 
+        // Add event listener for popstate
+        window.addEventListener("popstate", handlePopstate);
+
+        window.history.pushState({ bl: true }, ""); 
+
+        // Remove event listener on unmount
+        return () => window.removeEventListener("popstate", handlePopstate);
+
   }, []);
+
+
+  const handlePopstate = () => {
+    const historyState = window.history.state;
+    console.log("blHistory:", historyState.bl);
+    if (historyState && historyState.bl !== undefined) {
+      setbl(historyState.bl);
+    }
+  };
+
 
   const handleClick = (bool, header) => {
     setbl(bool);
     setHeading(header);
+
+    if(!bool){
+      window.scrollTo(0, 0);
+    }
+
+    // Push state to history when switching screens
+    window.history.pushState({ bl: bool }, "");
+
   };
 
   const setSelectedFoodsHelper = (selectedfoods) => {
@@ -73,7 +99,7 @@ const Home = () => {
   };
 
   const goBack = () => {
-    setbl(true);
+    window.history.back(); 
   };
 
   const search = (search) => {
