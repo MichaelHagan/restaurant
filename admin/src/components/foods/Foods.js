@@ -20,6 +20,7 @@ import {
 } from 'react-admin';
 
 import { useMediaQuery } from "@mui/material"
+import './Food.scss'
 const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)");
 const validateDescription = maxLength(120, "Maximum number of characters exceeded.(max:60 characters)");
 
@@ -41,7 +42,7 @@ export const SuperFoodList = () => {
           <TextField source="id" />
           <TextField source="name" />
           <TextField source="description" />
-          <TextField source="imageUrl" />
+          <TextField source="imageUrl" width={150} className="truncate-text"/>
           <NumberField source="price" />
           <BooleanField source="available" />
           <TextField source="category" />

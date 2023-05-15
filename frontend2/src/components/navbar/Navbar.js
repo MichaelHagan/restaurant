@@ -4,7 +4,7 @@ import logo from "../../images/logo.png";
 import Trigger from "../sidetrigger/Trigger";
 import Cart from '../cart/Cart';
 
-function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders }) {
+function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders, handleLinkClick }) {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
   const [showCart, setShowCart] = useState(false)
@@ -43,23 +43,23 @@ function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders }) {
         </div>
         <div className="md:flex">
           <ul className="hidden md:flex text-black">
-            <a href="/#home">
+            <a href="/#home" onClick={handleLinkClick}>
               <li className="ml-10 text-sm  uppercase border-b-2 cursor-pointer hover:border-yellow-400">
                 Home
               </li>
             </a>
-            <a href="/#meals">
+            <a href="/#meals" onClick={handleLinkClick}>
               <li className="ml-10 text-sm uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
                 Meals
               </li>
             </a>
-            <a href="/#about" smooth={true} duration={300}>
+            <a href="/#about" smooth={true} duration={300} onClick={handleLinkClick}>
               <li className="ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
                 About
               </li>
             </a>
 
-            <a href="/#contact" smooth={true} duration={300}>
+            <a href="/#contact" smooth={true} duration={300} onClick={handleLinkClick}>
               <li className="ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
                 Contact
               </li>

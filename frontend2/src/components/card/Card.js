@@ -1,11 +1,11 @@
 import './Card.scss'
 
-const Card = ({ id, name, desc, price, available }) => {
+const Card = ({ id, name, desc, price, available, image }) => {
 
 
   return (
     <div className={available ? "shadow-lg rounded-xl shadow-gray" : 'overlay'}>
-      <figure><img src="food.jpg" alt="food" /></figure>
+      <figure><img src={image} alt="food" /></figure>
       <div className="card-body relative h-[250px]  md:h-[250px] lg:h-[230px] w-full">
         <h2 className="card-title text-gray-600 text-left">{name}</h2>
         <p className='text-left text-sm'>{desc}</p>
