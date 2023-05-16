@@ -32,6 +32,7 @@ const CategoryList = ({ Category, List, selectHandler }) => {
                 desc={food.description}
                 price={food.price}
                 available={food.available}
+                image = {food.imageUrl}
               />
             </div>
           ))}

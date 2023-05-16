@@ -20,6 +20,7 @@ import {
 } from 'react-admin';
 
 import { useMediaQuery } from "@mui/material"
+import './Food.scss'
 const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)");
 const validateDescription = maxLength(120, "Maximum number of characters exceeded.(max:60 characters)");
 
@@ -41,7 +42,7 @@ export const SuperFoodList = () => {
           <TextField source="id" />
           <TextField source="name" />
           <TextField source="description" />
-          <TextField source="imageUrl" />
+          <TextField source="imageUrl" style={{ display: 'inline-block', maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis' }}/>
           <NumberField source="price" />
           <BooleanField source="available" />
           <TextField source="category" />
@@ -92,13 +93,14 @@ export const FoodEdit = () => {
   return (
     <Edit title={<FoodTitle />}>
     <SimpleForm>
-      <TextInput source="id" disabled />
-      <TextInput source="name" validate={validateName} />
-      <TextInput source="description" multiline rows={5} validate={validateDescription} />
-      <ImageInput source="imageUrl" label="Food Picture">
+      <TextInput source="id" disabled style={{ width: '10%' }}/>
+      <TextInput source="name" validate={validateName} style={{ width: '40%' }}/>
+      <TextInput source="description" multiline rows={5} validate={validateDescription} style={{ width: '40%' }}/>
+      <TextInput source="imageUrl" style={{ width: '100%' }} label="Current Image Url" disabled />
+      <ImageInput source="imageUrl" label="Change Image">
         <ImageField source="src" title="title" />
       </ImageInput>
-      <NumberInput source="price" />
+      <NumberInput source="price" style={{ width: '20%' }}/>
       <BooleanInput source="available" />
       <SelectInput source="category" choices={[
         { id: 'Breakfast', name: 'Breakfast' },
@@ -106,6 +108,7 @@ export const FoodEdit = () => {
         { id: 'Local', name: 'Local' },
         { id: 'Continental', name: 'Continental' }
       ]}
+      style={{ width: '20%' }}
       />
     </SimpleForm>
   </Edit>
@@ -115,18 +118,19 @@ export const FoodEdit = () => {
 export const FoodCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="name" validate={validateName} />
-      <TextInput source="description" multiline rows={2} validate={validateDescription} />
-      <ImageInput source="imageUrl" label="Food Picture">
+      <TextInput source="name" validate={validateName} style={{ width: '40%' }}/>
+      <TextInput source="description" multiline rows={2} validate={validateDescription} style={{ width: '40%' }}/>
+      <ImageInput source="imageUrl" label="Image">
         <ImageField source="src" title="title" />
       </ImageInput>
-      <NumberInput source="price" />
+      <NumberInput source="price" style={{ width: '20%' }} />
       <SelectInput source="category" choices={[
         { id: 'Breakfast', name: 'Breakfast' },
         { id: 'Dessert', name: 'Dessert' },
         { id: 'Local', name: 'Local' },
         { id: 'Continental', name: 'Continental' }
       ]}
+      style={{ width: '20%' }}
       />
     </SimpleForm>
   </Create>

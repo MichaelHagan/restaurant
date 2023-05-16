@@ -62,6 +62,10 @@ const Home = () => {
 
   };
 
+  const handleLinkClick = () =>{
+    window.history.pushState({ bl: true }, "");
+  }
+
   const setSelectedFoodsHelper = (selectedfoods) => {
     setSelectedfoods(selectedfoods);
     localStorage.setItem('selectedfoods', JSON.stringify(selectedfoods));
@@ -124,6 +128,7 @@ const Home = () => {
           remove={removeSelected}
           updateQuantity={updateQuantity}
           clearOrders={clearOrders}
+          handleLinkClick={handleLinkClick}
         />
         {bl ? (
           <div>

@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Food = require('../models/foods');
 const jwt = require('jsonwebtoken');
-const multer = require('multer')
-const upload = multer({ dest: './public/uploads' })
+const multer = require('multer');
+const upload = multer({ dest: './public/uploads' });
+const {cloudinary} = require('../cloudinary');
 
 
 function authenticate(req,res,next){
@@ -75,21 +76,6 @@ try{
 }
 });
 
-// router.get('/category',(req,res,next)=>{
-
-//   try{
-//     res.json([
-//       {"category":"Breakfast"},
-//       {"category":"Lunch"},
-//       {"category":"Local"},
-//       {"category":"Continental"}
-//     ]);
-//   }catch(e){
-//     res.send(e.message)
-//   }
-
-// })
-
 
 //Get single food
 router.get('/:id',async(req,res)=>{
@@ -121,6 +107,13 @@ router.post('/',authenticate, upload.single('image'),async(req,res)=>{
     available,
     category
   } = JSON.parse(req.body.data);
+
+  if(imageData){
+    const result = await cloudinary.uploader.upload(imageData.path,{
+      upload_preset: 'test_preset'
+    });
+    imageUrl = result.secure_url;
+  }
 
   Food.create({
     name, 
@@ -198,11 +191,14 @@ router.put('/:id',authenticate, upload.single('image'), async(req,res)=>{
 
     if(imageData){
       check = false;
+      const result = await cloudinary.uploader.upload(imageData.path,{
+        upload_preset: 'test_preset'
+      });
+
       await Food.update(
-        { "imageUrl": imageData.filename},
+        { "imageUrl": result.secure_url},
         { where: {id: id} }
       );
-
       output_str += `Food imageUrl was updated with value ${imageData.filename}\n`;
     }
 
