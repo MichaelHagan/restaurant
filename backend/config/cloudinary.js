@@ -27,6 +27,6 @@ const createTestPreset = async () => {
   }
 };
 
-createTestPreset();
+// createTestPreset();
 
 module.exports = { cloudinary };

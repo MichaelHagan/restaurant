@@ -1,19 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
+let createError = require('http-errors');
+let express = require('express');
 const cors = require("cors");
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 const db = require('./config/database');
+const Admin = require('./models/admins');
+const adminSeeder = require('./seeders/adminSeeder')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var foodsRouter = require('./routes/foods');
-var ordersRouter = require('./routes/orders');
-var deliveriesRouter = require('./routes/delivery_fees');
-var adminsRouter = require('./routes/admins');
 
-var app = express();
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/user');
+let foodsRouter = require('./routes/food');
+let ordersRouter = require('./routes/order');
+let deliveriesRouter = require('./routes/deliveryFee');
+let adminsRouter = require('./routes/admin');
+
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,10 +44,24 @@ app.use(function(req, res, next) {
 //db models sync
 db.sync().then((result)=>{
   console.log('models synced successfully')
-  // console.log(result);
+
+  // Check if the admin table is empty
+  Admin.count().then((countResponse)=>{
+
+  if (countResponse === 0) {
+      // Seed the admin table with data
+      adminSeeder.up(null, Admin.sequelize).then((seedResponse)=>{
+      console.log(`Base administrator created. You can log in with "admin" as username and password`);
+     });
+  }
+
+});
+
 }).catch((err)=>{
   console.log(err);
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
