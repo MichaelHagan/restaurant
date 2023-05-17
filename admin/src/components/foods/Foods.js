@@ -18,9 +18,7 @@ import {
   SelectInput,
   maxLength
 } from 'react-admin';
-
 import { useMediaQuery } from "@mui/material"
-import './Food.scss'
 const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)");
 const validateDescription = maxLength(120, "Maximum number of characters exceeded.(max:60 characters)");
 
