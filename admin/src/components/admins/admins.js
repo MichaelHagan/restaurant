@@ -50,7 +50,7 @@ export const AdminEdit = () => (
             <TextInput source="id" disabled/>
             <TextInput source="name" />
             <TextInput source="email" />
-            <TextField source="phone_number" />
+            <TextInput source="phone_number" />
             <BooleanInput source="superAdmin" />
             <PasswordInput source="password" />
         </SimpleForm>
@@ -62,7 +62,7 @@ export const AdminCreate = () => (
         <SimpleForm>
             <TextInput source="name" />
             <TextInput source="email" />
-            <TextField source="phone_number" />
+            <TextInput source="phone_number" />
             <BooleanInput source="superAdmin" />
             <PasswordInput source="password" />
         </SimpleForm>
