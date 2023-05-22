@@ -2,68 +2,103 @@
 
 A Food Ordering System.
 
-## Table of contents
+## Table of Contents
 
-* [General info](#general-info)
-* [Screenshot](#screenshot)
-* [Technologies](#technologies)
-* [Languages](#languages)
-* [Features](#features)
-* [Inspiration](#inspiration)
-* [Developers](#developers)
+- [General Info](#general-info)
+- [Screenshots](#screenshots)
+- [Technologies](#technologies)
+- [Languages](#languages)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributors](#contributors)
+- [License](#license)
 
-## General info
+## General Info
 
-A food ordering system together with its admin panel to manage users, food orders and site info.
+Order Me is a food ordering system that provides both users and administrators with a user-friendly interface to manage food orders, user information, and site details. The system consists of a user interface and an administrator panel.
 
-## Screenshot
+## Screenshots
 
 ![Screenshot of User GUI](Screenshot.png)
-
 ![Screenshot of Administrator GUI](Screenshot2.png)
 
 ## Technologies
 
-* Node and Node Package Manager
-* Git & GitHub
-* Express
-* Postgres
-* HTML
-* CSS
-* React
+The Order Me project utilizes the following technologies:
+
+- Node.js and npm (Node Package Manager)
+- Express.js
+- PostgreSQL (Database Management System)
+- HTML
+- CSS
+- React
 
 ## Languages
 
-* JavaScript
+- JavaScript
 
 ## Features
 
-The GUI entails two forms, a user UI and an administrator UI.
+Order Me includes the following features:
 
-The User UI allows users to:
-* Place an order
-* Check status of placed order(Requires User to have an account. You can check flowchart for more details)
+### User Interface:
 
-The Admin UI allows users to:
-* Manage Foods. This denotes the prices, name, description etc of foods shown on the User UI.
-* Manage Orders.
-* Manage Delivery Fees.
-* View Users.
-* View Administrators.
-* Download Reports on each table in xlsx(excel) format.
+- Place an order
+- Check the status of placed orders (requires user account)
 
+### Administrator Panel:
 
-## Status
+- Manage foods (prices, names, descriptions, etc., shown in the user interface)
+- Manage orders
+- Manage delivery fees
+- View users
+- View administrators
+- Download reports in xlsx (Excel) format for each table
 
-Not Hosted.
-Still in development.
+## Installation
 
-## Inspiration
+To run the project locally, follow these steps:
 
-We started this project to gain more experience with the technologies and processes used in building the application and look into the prospect of making it a functioning business platform.
+### Backend
 
-## Developers
+1. Make sure you have PostgreSQL installed on your machine. You can download it from [PostgreSQL](https://www.postgresql.org/download).
 
-[Michael Hagan](https://github.com/michaelhagan)
+2. Open your terminal and navigate to the `backend` directory.
 
-[Tracy Sarah Afram-Owusu](https://github.com/tracy1-sarah)
+3. Create a `.env` file following the structure in `.env.example`.
+
+4. Change the username and password in `config.json` in the `config` folder to match your PostgreSQL setup. It currently contains the default values of PostgreSQL.
+
+5. Run `npm i` to install all dependencies.
+
+6. Run `npm start` to start the server.
+
+### Frontend
+
+1. Open your terminal and navigate to the `Frontend` directory.
+
+2. Run `npm i` to install all dependencies.
+
+3. Run `npm start` to start the application.
+
+### Admin
+
+1. Open your terminal and navigate to the `Admin` directory.
+
+2. Run `npm i` to install all dependencies.
+
+3. Run `npm start` to start the application.
+
+4. On Windows, you can run `npm electron start` to run a native version of the app or `npm electron build` to build a native version of the app.
+
+5. Sign in to the admin panel using your credentials. The system creates an admin user when you run the server for the first time. Username and password for that is `admin`
+
+## Contributors
+
+- [Michael Hagan](https://github.com/michaelhagan)
+- [Tracy Sarah Afram-Owusu](https://github.com/tracy1-sarah)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
