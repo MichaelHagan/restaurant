@@ -3,8 +3,8 @@ const dbName = process.env.DATABASE_NAME;
 const pgtools = require('pgtools');
 
 const dbConfig = {
-  user: 'postgres',
-  password: 'postgres',
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
   port: 5432,
   host: '127.0.0.1'
 };

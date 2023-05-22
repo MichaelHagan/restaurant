@@ -3,7 +3,7 @@ require('dotenv').config();
 const dbName = process.env.DATABASE_NAME;
 
 // Connect to the database
-module.exports = new Sequelize(dbName, 'postgres', 'postgres', {
+module.exports = new Sequelize(dbName, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
     host: '127.0.0.1',
     dialect: 'postgres',
     operatorsAliases: '0',
