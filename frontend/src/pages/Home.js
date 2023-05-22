@@ -1,37 +1,74 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
-import Button from 'react-bootstrap/Button';
-import SideBar from '../components/sidebar/SideBar';
-import SearchBar from '../components/search/SearchBar';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
-import Category from '../components/category/Category';
-import CategoryList from '../components/categorylist/CategoryList';
-import './Home.scss';
+import SearchBar from "../components/search/SearchBar";
+import Header from "../components/header/Header";
+import Category from "../components/category/Category";
+import CategoryList from "../components/categorylist/CategoryList";
+import About from "../components/about/About";
+import Footer from "../components/footer/Footer";
+import Contact from "../components/contact/Contact";
+import Navbar from "../components/navbar/Navbar";
 
 const Home = () => {
   const baseURL = "http://localhost:3050";
   const [bl, setbl] = useState(true);
   const [heading, setHeading] = useState("");
-  const [sidebar, setSidebar] = useState(false);
   const [foodlist, setFoodlist] = useState([]);
   const [selectedfoods, setSelectedfoods] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const [searchFoodList, setsearchFoodList] = useState([]);
 
   useEffect(() => {
+    const storedSelectedFoods = localStorage.getItem('selectedfoods');
+
     axios.get(baseURL + "/foods").then((response) => {
       setFoodlist(response.data);
     });
+
+    if (storedSelectedFoods) {
+      setSelectedfoods(JSON.parse(storedSelectedFoods));
+    }
+
+        // Add event listener for popstate
+        window.addEventListener("popstate", handlePopstate);
+
+        window.history.pushState({ bl: true }, ""); 
+
+        // Remove event listener on unmount
+        return () => window.removeEventListener("popstate", handlePopstate);
+
   }, []);
+
+
+  const handlePopstate = () => {
+    const historyState = window.history.state;
+    console.log("blHistory:", historyState.bl);
+    if (historyState && historyState.bl !== undefined) {
+      setbl(historyState.bl);
+    }
+  };
+
 
   const handleClick = (bool, header) => {
     setbl(bool);
     setHeading(header);
+
+    if(!bool){
+      window.scrollTo(0, 0);
+    }
+
+    // Push state to history when switching screens
+    window.history.pushState({ bl: bool }, "");
+
+  };
+
+  const handleLinkClick = () =>{
+    window.history.pushState({ bl: true }, "");
   }
 
-  const showSide = () => {
-    setSidebar(!sidebar);
+  const setSelectedFoodsHelper = (selectedfoods) => {
+    setSelectedfoods(selectedfoods);
+    localStorage.setItem('selectedfoods', JSON.stringify(selectedfoods));
   }
 
   const updateQuantity = (id, effect) => {
@@ -40,68 +77,80 @@ const Home = () => {
         effect ? element.quantity++ : element.quantity--;
       }
     }
-    setSelectedfoods([...selectedfoods]);
-  }
+    setSelectedFoodsHelper([...selectedfoods]);
+  };
 
   const addSelected = (selected) => {
-
     let notexist = true;
 
-    selectedfoods.forEach(element => {
+    selectedfoods.forEach((element) => {
       if (element.id === selected.id) {
         notexist = false;
       }
     });
 
     if (notexist && selected.available) {
-      setSelectedfoods([...selectedfoods, { ...selected, quantity: 1 }])
+      setSelectedFoodsHelper([...selectedfoods, { ...selected, quantity: 1 }]);
     }
-
-  }
+  };
 
   const removeSelected = (id) => {
-    setSelectedfoods(selectedfoods.filter(el => el.id !== id));
-  }
+    setSelectedFoodsHelper(selectedfoods.filter((el) => el.id !== id));
+  };
 
   const clearOrders = () => {
-    setSelectedfoods([]);
-  }
+    setSelectedFoodsHelper([]);
+  };
+
+  const goBack = () => {
+    window.history.back(); 
+  };
 
   const search = (search) => {
     let trimmedVal = search.replace(" ", "").toLowerCase().trim();
-    if (trimmedVal) { setIsSearch(true) }
-    setsearchFoodList(foodlist.filter(el => el.name.replace(" ", "").toLowerCase().includes(trimmedVal)));
-  }
+    if (trimmedVal) {
+      setIsSearch(true);
+    }
+    setsearchFoodList(
+      foodlist.filter((el) =>
+        el.name.replace(" ", "").toLowerCase().includes(trimmedVal)
+      )
+    );
+  };
 
   return (
-    <div id="home-main">
-      {sidebar && <SideBar
-        List={selectedfoods}
-        remove={removeSelected}
-        updateQuantity={updateQuantity}
-        clearOrders={clearOrders}
-      />}
-      <div className="main-page">
-        <Header handleClick={showSide} count={selectedfoods.length} />
-        <div className="body">
-          {bl ?
-            <div className="categories">
-              <Category handleClick={handleClick} title={"Breakfast"} background={"breakfast"} />
-              <Category handleClick={handleClick} title={"Dessert"} background={"dessert"} />
-              <Category handleClick={handleClick} title={"Local"} background={"local"} />
-              <Category handleClick={handleClick} title={"Continental"} background={"continental"} />
-            </div> :
-            <div>
-              <Button variant="outline-secondary"
-                onClick={() => setbl(!bl)}>
-                Back
-              </Button>
-              <SearchBar Search={search} />
-              <CategoryList Category={heading} List={isSearch ? searchFoodList.filter(el => el.category === heading) : foodlist.filter(el => el.category === heading)} 
-                selectHandler={addSelected} />
-            </div>
-          }
-        </div>
+    <div>
+      <div>
+        <Navbar
+          goBack={goBack}
+          count={selectedfoods.length}
+          List={selectedfoods}
+          remove={removeSelected}
+          updateQuantity={updateQuantity}
+          clearOrders={clearOrders}
+          handleLinkClick={handleLinkClick}
+        />
+        {bl ? (
+          <div>
+            <Header />
+            <Category handleClick={handleClick} />
+            <About />
+            <Contact />
+          </div>
+        ) : (
+          <div>
+            <SearchBar Search={search} />
+            <CategoryList
+              Category={heading}
+              List={
+                isSearch
+                  ? searchFoodList.filter((el) => el.category === heading)
+                  : foodlist.filter((el) => el.category === heading)
+              }
+              selectHandler={addSelected}
+            />
+          </div>
+        )}
         <Footer />
       </div>
     </div>

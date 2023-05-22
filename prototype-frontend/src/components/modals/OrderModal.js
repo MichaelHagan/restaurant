@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import axios from "axios";
 import './OrderModal.scss';
 
-const OrderModal = ({orders,clearOrders, total}) => {
+const OrderModal = ({orders,clearOrders}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,7 +39,7 @@ const OrderModal = ({orders,clearOrders, total}) => {
   const [info,setInfo] = useState({
     "location":"Pick Up",
     "deliveryFee":0,
-    "deliveryFeeId":1
+    "deliveryFeeId":4
 });
 
 const generateDetails = () =>{
@@ -50,7 +50,7 @@ const generateDetails = () =>{
 
   details += `Delivery: ${info.deliveryFee}, `;
   
-  details += "Total: "+ calculateTotal();
+  details+= "Total: "+ calculateTotal();
 
   return details;
 
@@ -58,11 +58,15 @@ const generateDetails = () =>{
 
 
 const calculateTotal = () =>{
-  let temp = 0;
+  let total = 0;
 
-  temp = total + info.deliveryFee;
+  for(const element of orders){
+    total += element.price * element.quantity;
+  }
 
-  return temp;
+  total += info.deliveryFee;
+
+  return total;
 
 }
 
@@ -89,7 +93,7 @@ const calculateTotal = () =>{
         DeliveryFeeId:info.deliveryFeeId,
         payment:false,
         payment_type:"Cash",
-
+        UserId:0  //User Id is 0 for orders that aren't coming from an account.
       })
       .then((response) => {
         if(response.statusText === 'OK'){
@@ -118,8 +122,6 @@ const calculateTotal = () =>{
             title: 'Sorry, something went wrong, please check your order and try again',
             showConfirmButton: true,
           })
-
-          console.log("Here:", status);
         }
       }).catch(e=>{
         Swal.fire({
@@ -128,8 +130,6 @@ const calculateTotal = () =>{
           title: 'Sorry, something went wrong, please check your connection and try again',
           showConfirmButton: true,
         })
-        
-        console.log("Here2:", status, "Error: ",e.message);
       });
 
   }
@@ -152,16 +152,9 @@ const calculateTotal = () =>{
   return (
     <div className='order-button'>
 
-      {/* <Button variant="outline-secondary" onClick={handleShow}>Order</Button> */}
-            <button
-                type="button"
-                className="bg-red-500 text-white rounded-xl p-2 mt-4 w-full text-lg"
-                onClick={handleShow}
-              >
-                Make Payment
-              </button>
+      <Button variant="outline-secondary" onClick={handleShow}>Order</Button>
 
-    <Modal  show={show}  onHide={handleClose}
+      <Modal show={show} onHide={handleClose}
       centered
       >
         <Modal.Header closeButton>
@@ -217,7 +210,7 @@ const calculateTotal = () =>{
       <Modal
         show={show2}
         onHide={handleClose2}
-        backdrop="true"
+        backdrop="static"
         keyboard={false}
         centered
       >
@@ -269,9 +262,6 @@ const calculateTotal = () =>{
         style={{justifyContent:"center"}}
         >
           <Button variant="success" onClick={orderHandler}>Place Order</Button>
-          <Button variant="secondary" onClick={handleClose2}>
-            Cancel
-          </Button>
         </Modal.Footer>
       </Modal>
 

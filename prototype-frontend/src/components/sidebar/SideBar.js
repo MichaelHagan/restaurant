@@ -2,6 +2,7 @@ import React from 'react';
 import './SideBar.scss';
 import SideBarCard from '../card/SideBarCard';
 import OrderModal from '../modals/OrderModal';
+// import AuthOrderModal from '../modals/AuthOrderModal';
 import {GiFoodTruck} from "react-icons/gi";
 
 const SideBar = ({List,remove,updateQuantity,clearOrders}) => {

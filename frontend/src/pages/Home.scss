@@ -2,118 +2,147 @@ $orange-light : #FD841F;
 $orange-deep : #E14D2A;
 $red : #CD104D;
 $purple : #9C2C77;
+$bg: #F5F3EC;
+$Color3:#F0BB62;
 
-*{
+
+
+* {
     box-sizing: border-box;
 }
-#home-main{
-display: flex;  
-height: 100vh;
 
 
+/* custom scrollbar */
 
-.sidebar-main{
-    // animation-delay: 2s;
-    // animation: slideMe .5s ease-in;
-
-    // @keyframes slideMe{
-    //     0%{
-    //     transform: translateX(-500px);
-    //     }
-    //     60%{
-    //     transform: translateX(0px);
-    //     }
-    //     62%{
-    //     transform: translateX(30px);
-    //     }
-        
-    //     100%{
-    //     transform: skew(0deg) ;
-    //     }
-        
-    //     }
-
-} 
-
-
-
-
-.main-page{
-    width: 100%;
-    height: 100%;
-
-
-    #header-main{
-        height: 10%;
-    }
-
-    .body{
-        box-sizing: border-box;
-        height: 80%;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        overflow-y: scroll;
-        overflow-x: hidden;
-
-        #categorylist-main{
-            height: 95%;
-        }
-
-        .categories{
-            height: 92%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-
-            #category-main{
-                height: 24% !important;
-                width: 100%;
-                .card-img{
-                    height:100%;
-                    width: 100%;
-                }
-            }   
-        }
-    }
-
-    #footer-main{
-        height: 10%;
-    }
-
-}
-
-//TODO:add mediaquery to only implement for browser view
-@media (min-width:825px ){
 ::-webkit-scrollbar {
-width:0.4rem;
+    width: 8px !important;
+    height: 3px !important;
 }
 
 ::-webkit-scrollbar-track {
-    background: lightgray;
-    border-radius: 100vw;
-    margin-block: .5rem;
+    background: #e0e0e0 !important;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 100vw;
-    background: rgb(172, 172, 172);
+    background: #a0a0a0 !important;
+    border-radius: 10px !important;
 }
+
+::-webkit-scrollbar-thumb:hover {
+    background: $Color3 !important;
 }
 
+#home-main {
+    display: flex;
+    height: 100vh;
 
 
-@media (max-width:1080px ){
-    
-    #sidecard-main{
-        *{
-        font-size: .7rem;
+    .sidebar-main {
+        animation-delay: 2s;
+        animation: slideMe .5s ease-in;
+
+        @keyframes slideMe {
+            0% {
+                transform: translateX(-500px);
+            }
+
+            60% {
+                transform: translateX(0px);
+            }
+
+            62% {
+                transform: translateX(30px);
+            }
+
+            100% {
+                transform: skew(0deg);
+            }
+
+        }
+
     }
-}
-}
+
+    .main-page {
+        width: 100vw;
+        height: 100%;
+
+
+        #header-main {
+            height: 100%;
+        }
+
+        .body {
+            margin-top: 6rem;
+            // box-sizing: border-box;
+            // height: 80%;
+            // padding: 1rem;
+            // display: flex;
+            // flex-direction: column;
+            // align-items: center;
+            // justify-content: space-between;
+            // overflow-y: scroll;
+            // overflow-x: hidden;
+            // background-color: #F5F3EC;
+
+            #categorylist-main {
+                height: 95%;
+            }
+
+            .categories {
+                // height: 92%;
+                // width: 100%;
+                margin-top: 10rem;
+                display: flex;
+                flex-direction: flex;
+                padding: 5rem;
+                align-items: center;
+                justify-content: space-between;
+
+                #category-main {
+                    height: 24% !important;
+                    width: 100%;
+
+                    .card-img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        #footer-main {
+            height: 10%;
+        }
+
+    }
+
+    //TODO:add mediaquery to only implement for browser view
+    @media (min-width:825px) {
+        ::-webkit-scrollbar {
+            width: 0.4rem;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: lightgray;
+            border-radius: 100vw;
+            margin-block: .5rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 100vw;
+            background: rgb(172, 172, 172);
+        }
+    }
+
+
+
+    @media (max-width:1080px) {
+
+        #sidecard-main {
+            * {
+                font-size: .7rem;
+            }
+        }
+    }
 
 }
