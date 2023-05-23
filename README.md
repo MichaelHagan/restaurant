@@ -62,7 +62,7 @@ To run the project locally, follow these steps:
 
 ### Backend
 
-1. Make sure you have PostgreSQL installed on your machine. You can download it from [PostgreSQL](https://www.postgresql.org/download).
+1. Make sure you have [PostgreSQL](https://www.postgresql.org/download) and [Node](https://nodejs.org/en/download/) installed on your machine.
 
 2. Open your terminal and navigate to the `backend` directory.
 
@@ -98,7 +98,3 @@ To run the project locally, follow these steps:
 
 - [Michael Hagan](https://github.com/michaelhagan)
 - [Tracy Sarah Afram-Owusu](https://github.com/tracy1-sarah)
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).

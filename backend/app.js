@@ -43,27 +43,25 @@ app.use(function (req, res, next) {
 });
 
 //db models sync
-initializeDatabase().then
-  ((res) => {
-    db.sync().then((result) => {
-      console.log('models synced successfully')
+initializeDatabase().then((res) => {
+  db.sync().then((result) => {
+    console.log('models synced successfully')
 
-      // Check if the admin table is empty
-      Admin.count().then((countResponse) => {
+    // Check if the admin table is empty
+    Admin.count().then((countResponse) => {
 
-        if (countResponse === 0) {
-          // Seed the admin table with data
-          adminSeeder.up(null, Admin.sequelize).then((seedResponse) => {
-            console.log(`Base administrator created. You can log in with "admin" as username and password`);
-          });
-        }
+      if (countResponse === 0) {
+        // Seed the admin table with data
+        adminSeeder.up(null, Admin.sequelize).then((seedResponse) => {
+          console.log(`Base administrator created. You can log in with "admin" as username and password`);
+        });
+      }
+    });
 
-      });
-
-    })
-  }).catch((err) => {
-    console.log(err);
-  });
+  })
+}).catch((err) => {
+  console.log(err);
+});
 
 
 

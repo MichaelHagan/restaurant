@@ -10,22 +10,22 @@ const dbConfig = {
 };
 
 
-const  initializeDatabase = async() => {
+const initializeDatabase = async () => {
   try {
-    // Check if the database exists
-   await pgtools.createdb(dbConfig, dbName);
-   console.log(`Database ${dbName} created`);
+    // Create database if not present
+    await pgtools.createdb(dbConfig, dbName);
+    console.log(`Database ${dbName} created`);
 
   } catch (error) {
-    if(error.message === "Attempted to create a duplicate database."){
-        console.log("Database Already Exists");
-    }else{
-        console.error('An error occurred:', error);
-        throw error;
+    if (error.message === "Attempted to create a duplicate database.") {
+      console.log("Database Already Exists");
+    } else {
+      console.error('An error occurred:', error);
+      throw error;
     }
   }
 }
 
 module.exports = {
-    initializeDatabase
+  initializeDatabase
 }
