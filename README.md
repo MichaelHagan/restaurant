@@ -12,7 +12,6 @@ A Food Ordering System.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributors](#contributors)
-- [License](#license)
 
 ## General Info
 
