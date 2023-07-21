@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import SideBar from '../components/sidebar/SideBar';
-import SearchBar from '../components/search/SearchBar';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import Category from '../components/category/Category';
@@ -91,14 +90,10 @@ const Home = () => {
               <Category handleClick={handleClick} title={"Local"} background={"local"} />
               <Category handleClick={handleClick} title={"Continental"} background={"continental"} />
             </div> :
-            <div>
-              <Button variant="outline-secondary"
-                onClick={() => setbl(!bl)}>
-                Back
-              </Button>
-              <SearchBar Search={search} />
+            <div >
+             
               <CategoryList Category={heading} List={isSearch ? searchFoodList.filter(el => el.category === heading) : foodlist.filter(el => el.category === heading)} 
-                selectHandler={addSelected} />
+                selectHandler={addSelected} search={search} />
             </div>
           }
         </div>

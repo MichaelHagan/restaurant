@@ -1,6 +1,7 @@
 import React from "react";
 import './CategoryList.scss';
 import Card from '../card/Card1';
+import SearchBar from "../search/SearchBar";
 
 
 const CategoryList = ({ Category, List, selectHandler }) => {
@@ -29,8 +30,10 @@ const CategoryList = ({ Category, List, selectHandler }) => {
           available = {food.available}
           />
         </div>
+        
       ))}
       </div>
+
     </div>
   );
 };

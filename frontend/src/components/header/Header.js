@@ -14,7 +14,7 @@ const Header = () => {
           <h2 className='text-6xl'>Discover the best meals</h2>
           <p className='text-2xl text-center py-6'>The best meals at affordable prices</p>
         </div>
-        <div className='col-span-2 w-full h-auto'>
+        {/* <div className='col-span-2 w-full h-auto'>
           <div className='p-4'>
             <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
               <div className='flex flex-col'>
@@ -29,7 +29,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-        </div> 
+        </div>  */}
         <div className='flex justify-center mt-6'>
           <a href="/#meals">
             <div className="rounded-full shadow-md bg-black shadow-yellow-300 p-6 cursor-pointer hover:scale-110 ease-in duration-300">

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import SearchBar from "../components/search/SearchBar";
 import Header from "../components/header/Header";
 import Category from "../components/category/Category";
 import CategoryList from "../components/categorylist/CategoryList";
@@ -139,7 +138,6 @@ const Home = () => {
           </div>
         ) : (
           <div>
-            <SearchBar Search={search} />
             <CategoryList
               Category={heading}
               List={
