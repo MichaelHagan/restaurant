@@ -25,7 +25,8 @@ const CategoryList = ({ Category, List, selectHandler, search }) => {
                   name: food.name,
                   desc: food.description,
                   price: food.price,
-                  available: food.available
+                  available: food.available,
+                  image: food.imageUrl
                 }
               )}
             >

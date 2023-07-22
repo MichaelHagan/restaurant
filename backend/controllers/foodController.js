@@ -4,13 +4,13 @@ const { cloudinary } = require('../config/cloudinary');
 
 
 const getAllFoods = async (req, res) => {
-console.log("heeerrreeee");
+// console.log("heeerrreeee");
     try {
         let foods = await Food.findAll();
         res.header('Access-Control-Expose-Headers', 'X-Total-Count');
         res.header('X-Total-Count', `${foods.length}`);
         let sortedFoods = sort(req,foods);
-        console.log("Foods: ",sortedFoods);
+        // console.log("Foods: ",sortedFoods);
         res.send(sortedFoods);
     } catch (e) {
         console.log(e.message);

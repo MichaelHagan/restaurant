@@ -21,7 +21,6 @@ const Home = () => {
     const storedSelectedFoods = localStorage.getItem('selectedfoods');
 
     axios.get(baseURL + "/foods").then((response) => {
-      console.log(response.data);
       setFoodlist(response.data);
     });
 
@@ -42,7 +41,6 @@ const Home = () => {
 
   const handlePopstate = () => {
     const historyState = window.history.state;
-    console.log("blHistory:", historyState.bl);
     if (historyState && historyState.bl !== undefined) {
       setbl(historyState.bl);
     }
