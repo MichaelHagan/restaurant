@@ -10,7 +10,7 @@ const Header = () => {
         <img className='w-full h-full object-cover mix-blend-overlay' src={image} alt="support" />
       </div>
       <div className='max-w-[1240px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full relative'>
-        <div className='lg:text-white'>
+        <div className='text-white'>
           <h2 className='text-6xl'>Discover the best meals</h2>
           <p className='text-2xl text-center py-6'>The best meals at affordable prices</p>
         </div>
