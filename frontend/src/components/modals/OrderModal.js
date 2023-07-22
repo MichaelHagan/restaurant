@@ -155,7 +155,7 @@ const calculateTotal = () =>{
       {/* <Button variant="outline-secondary" onClick={handleShow}>Order</Button> */}
             <button
                 type="button"
-                className="bg-red-500 text-white rounded-xl p-2 mt-4 w-full text-lg"
+                className="bg-red-500 text-white rounded-md p-2 mt-4 w-full text-lg"
                 onClick={handleShow}
               >
                 Make Payment

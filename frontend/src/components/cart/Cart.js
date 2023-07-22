@@ -11,6 +11,7 @@ const Cart = ({
   updateQuantity,
   remove,
   clearOrders,
+
 }) => {
   const increase = (id) => {
     updateQuantity(id, true);
@@ -34,7 +35,6 @@ const Cart = ({
   return temp;
 
 }
-
   return (
     <div
       className="w-full bg-black/40 fixed top-0 right-0 z-20 transition delay-150 duration-300 ease-in-out"
@@ -60,7 +60,7 @@ const Cart = ({
           {count >= 1 &&
             List.map((item) => (
               <div className="product" key={item?.id}>
-                <img src="food.jpg" className="cart-product-image" alt="" />
+                <img src={item?.image} className="cart-product-image" alt="" />
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item?.name}</h5>
@@ -97,6 +97,10 @@ const Cart = ({
         </div>
         {count >= 1 && (
           <div className="cart-bottom">
+            <div className="flex justify-end">
+              <span className="cursor-pointer text-red-500 mb-4 font-bold" onClick={clearOrders}>Clear All</span>
+            </div>
+
             <div className="total font-bold">
               <h3>Subtotal: </h3>
               <h3>Ghc {calculateTotal()}</h3>

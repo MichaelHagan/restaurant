@@ -40,3 +40,9 @@ html, body{
   background: #FDE047 !important;
 }
 
+::-webkit-scrollbar{
+  width: 0px !important;
+  height: 0px !important;
+  background-color: transparent !important;
+}
+
