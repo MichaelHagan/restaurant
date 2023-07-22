@@ -43,41 +43,47 @@ function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders, hand
         </div>
         <div className="md:flex">
           <ul className="hidden md:flex text-black">
-            <a href="/#home" onClick={handleLinkClick}>
-              <li className="ml-10 text-sm  uppercase border-b-2 cursor-pointer hover:border-yellow-400">
+            <li className="ml-10 text-sm  uppercase border-b-2 cursor-pointer hover:border-yellow-400">
+              <button onClick={handleLinkClick('home')} aria-label="Home">
                 Home
-              </li>
-            </a>
-            <a href="/#meals" onClick={handleLinkClick}>
-              <li className="ml-10 text-sm uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
+              </button>
+            </li>
+            <li className="ml-10 text-sm uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
+              <button onClick={handleLinkClick('meals')} aria-label="Meals">
                 Meals
-              </li>
-            </a>
-            <a href="/#about" smooth={true} duration={300} onClick={handleLinkClick}>
-              <li className="ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
+              </button>
+            </li>
+            <li className="ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
+              <button
+                onClick={handleLinkClick('about')}
+                aria-label="About"
+              >
                 About
-              </li>
-            </a>
-
-            <a href="/#contact" smooth={true} duration={300} onClick={handleLinkClick}>
-              <li className="ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
+              </button>
+            </li>
+            <li className="ml-10 text-sm  uppercase hover:border-b-2 cursor-pointer hover:border-yellow-400">
+              <button
+                onClick={handleLinkClick('contact')}
+                aria-label="Contact"
+              >
                 Contact
-              </li>
-            </a>
-            
-            <a className="text-black">
+              </button>
+            </li>
+            <li className="text-black">
               <p className="ml-10">
-                <Trigger count={count} setShowCart={setShowCart}/>
-                {showCart && <Cart 
-                clearOrders={clearOrders} 
-                setShowCart={setShowCart} 
-                count={count} 
-                List={List} 
-                updateQuantity={updateQuantity} 
-                remove={remove} 
-                />}
+                <Trigger count={count} setShowCart={setShowCart} />
+                {showCart && (
+                  <Cart
+                    clearOrders={clearOrders}
+                    setShowCart={setShowCart}
+                    count={count}
+                    List={List}
+                    updateQuantity={updateQuantity}
+                    remove={remove}
+                  />
+                )}
               </p>
-            </a>
+            </li>
           </ul>
 
           <div onClick={handleOpen} className="md:hidden">
@@ -123,40 +129,32 @@ function Navbar({ count, goBack, List, updateQuantity, remove, clearOrders, hand
             </div>
           </div>
           <div className="py-4 flex flex-col">
-            <ul className="uppercase text-black">
-              <a href="/#home">
-                <li onClick={() => setNav(false)} className="py-4 text-sm ">
-                  Home
-                </li>
-              </a>
-              <a href="/#meals">
-                <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Meals
-                </li>
-              </a>
-              <a href="/#about">
-                <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  About
-                </li>
-              </a>
-              <a href="/#contact">
-                <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Contact
-                </li>
-              </a>
-              <span className="text-black">
-              <p className="ml-10">
-                <Trigger count={count} setShowCart={setShowCart}/>
-                {showCart && <Cart 
-                clearOrders={clearOrders} 
-                setShowCart={setShowCart} 
-                count={count} 
-                List={List} 
-                updateQuantity={updateQuantity} 
-                remove={remove} 
-                />}
-              </p>
-            </span>
+            <ul className={`uppercase text-black ${nav ? 'block' : 'hidden'}`}>
+              <li onClick={handleLinkClick('home')} className="py-4 text-sm">
+                Home
+              </li>
+              <li onClick={handleLinkClick('meals')} className="py-4 text-sm">
+                Meals
+              </li>
+              <li onClick={handleLinkClick('about')} className="py-4 text-sm">
+                About
+              </li>
+              <li onClick={handleLinkClick('contact')} className="py-4 text-sm">
+                Contact
+              </li>
+              <li className="text-black">
+                <p className="ml-10">
+                  <Trigger count={count} setShowCart={setShowCart} />
+                  {showCart && <Cart
+                    clearOrders={clearOrders}
+                    setShowCart={setShowCart}
+                    count={count}
+                    List={List}
+                    updateQuantity={updateQuantity}
+                    remove={remove}
+                  />}
+                </p>
+              </li>
             </ul>
           </div>
         </div>

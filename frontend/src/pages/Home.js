@@ -21,6 +21,7 @@ const Home = () => {
     const storedSelectedFoods = localStorage.getItem('selectedfoods');
 
     axios.get(baseURL + "/foods").then((response) => {
+      console.log(response.data);
       setFoodlist(response.data);
     });
 
@@ -61,9 +62,25 @@ const Home = () => {
 
   };
 
-  const handleLinkClick = () =>{
-    window.history.pushState({ bl: true }, "");
-  }
+  const handleLinkClick = (targetId) => () => {
+    // If bl is false, set it to true first
+    if (!bl) {
+      setbl(true);
+      window.history.pushState({ bl: true }, ""); // Update the browser's history state
+    }
+  
+    // Get the target element's offset from the top
+    const targetElement = document.querySelector(`#${targetId}`);
+    if (targetElement) {
+      const offsetTop = targetElement.offsetTop;
+  
+      // Smoothly scroll to the target element
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   const setSelectedFoodsHelper = (selectedfoods) => {
     setSelectedfoods(selectedfoods);
@@ -146,6 +163,7 @@ const Home = () => {
                   : foodlist.filter((el) => el.category === heading)
               }
               selectHandler={addSelected}
+              search={search}
             />
           </div>
         )}

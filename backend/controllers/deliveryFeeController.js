@@ -1,5 +1,5 @@
 const Fee = require('../models/deliveries');
-const { compare } = require('../utils/sortHelper');
+const { sort } = require('../utils/sortHelper');
 
 
 const getAllDeliveries = async (req, res) => {

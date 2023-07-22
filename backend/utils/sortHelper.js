@@ -25,8 +25,8 @@ const compare = (a,b,sort)=>{
     }
 
 const sort = (req, data)=>{
+  if(data == undefined || data.length === 0 ){return []}
     let collumn = req.query._sort;
-    
     if (typeof data[0][collumn]==="number" || typeof data[0][collumn] === "boolean" || collumn === "createdAt" || collumn === "updatedAt" ) {
       req.query._order === "ASC" ? data.sort((a, b) => a[collumn] - b[collumn]) : data.sort((a, b) => b[collumn] - a[collumn]);
       data = data.slice(req.query._start, req.query._end);

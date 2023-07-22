@@ -1,6 +1,7 @@
 import React from "react";
 import Card from '../card/Card';
 import SearchBar from '../search/SearchBar'
+import NoFoodComponent from './nofood/NoFoodComponent'
 
 
 const CategoryList = ({ Category, List, selectHandler, search }) => {
@@ -40,7 +41,7 @@ const CategoryList = ({ Category, List, selectHandler, search }) => {
           ))}
         </div>:
         <div>
-          Leiit me duuit for yeewwww......  
+          <NoFoodComponent /> 
         </div>
         }
       </div>

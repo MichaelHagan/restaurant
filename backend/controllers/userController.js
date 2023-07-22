@@ -2,7 +2,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
-const { compare } = require('../utils/sortHelper');
+const { sort } = require('../utils/sortHelper');
 
 
 const getAllUsers = async (req, res) => {
