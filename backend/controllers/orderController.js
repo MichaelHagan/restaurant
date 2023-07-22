@@ -1,35 +1,14 @@
 const Order = require('../models/orders');
-const { compare } = require('../utils/sortHelper');
+const { sort } = require('../utils/sortHelper');
 
 const getAllOrders = async (req, res) => {
 
   try {
-
-    let collumn = req.query._sort;
-
-    Order.findAll()
-      .then(orders => {
-        res.header('Access-Control-Expose-Headers', 'X-Total-Count');
-        res.header('X-Total-Count', `${orders.length}`);
-
-        if (collumn === "id" || collumn === "DeliveryFeeId") {
-          req.query._order === "ASC" ? orders.sort((a, b) => parseInt(a[collumn]) - parseInt(b[collumn])) : orders.sort((a, b) => parseInt(b[collumn]) - parseInt(a[collumn]));
-          orders = orders.slice(req.query._start, req.query._end);
-        } else if (collumn === "total_price" || collumn === "createdAt" || collumn === "updatedAt" || collumn === "payment") {
-          req.query._order === "ASC" ? orders.sort((a, b) => a[collumn] - b[collumn]) : orders.sort((a, b) => b[collumn] - a[collumn]);
-          orders = orders.slice(req.query._start, req.query._end);
-        }
-        else {
-          orders.sort((a, b) => compare(a[collumn], b[collumn], req.query._order));
-          orders = orders.slice(req.query._start, req.query._end);
-        }
-        res.send(orders);
-      })
-      .catch(err => {
-        console.log(err)
-        res.send("Error")
-      })
-
+    let orders = await Order.findAll();
+    res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+    res.header('X-Total-Count', `${orders.length}`);
+    let sortedOrders = sort(req,orders);
+    res.send(sortedOrders);
   } catch (e) {
     res.send(e)
   }

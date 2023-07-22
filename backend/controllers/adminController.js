@@ -2,37 +2,17 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/admins');
 const bcrypt = require('bcrypt');
-const { compare } = require('../utils/sortHelper');
+const { sort } = require('../utils/sortHelper');
 
 
 const getAllAdmins = async (req, res) => {
 
   try {
-    let collumn = req.query._sort;
-
-    Admin.findAll()
-      .then(admins => {
-        res.header('Access-Control-Expose-Headers', 'X-Total-Count');
-        res.header('X-Total-Count', `${admins.length}`);
-
-        if (collumn === "id") {
-          req.query._order === "ASC" ? admins.sort((a, b) => parseInt(a[collumn]) - parseInt(b[collumn])) : admins.sort((a, b) => parseInt(b[collumn]) - parseInt(a[collumn]));
-          admins = admins.slice(req.query._start, req.query._end);
-        } else if (collumn === "superAdmin" || collumn === "createdAt" || collumn === "updatedAt") {
-          req.query._order === "ASC" ? admins.sort((a, b) => a[collumn] - b[collumn]) : admins.sort((a, b) => b[collumn] - a[collumn]);
-          admins = admins.slice(req.query._start, req.query._end);
-        }
-        else if (collumn !== undefined) {
-          admins.sort((a, b) => compare(a[collumn], b[collumn], req.query._order));
-          admins = admins.slice(req.query._start, req.query._end);
-        }
-
-        res.send(admins);
-      })
-      .catch(err => {
-        console.log(err)
-        res.send("Error")
-      })
+    let admins = await Admin.findAll();
+    res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+    res.header('X-Total-Count', `${admins.length}`);
+    let sortedAdmins = sort(req,admins);
+    res.send(sortedAdmins);
   } catch (e) {
     res.send(e)
   }
