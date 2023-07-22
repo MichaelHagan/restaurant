@@ -6,31 +6,11 @@ const { cloudinary } = require('../config/cloudinary');
 const getAllFoods = async (req, res) => {
 
     try {
-        let collumn = req.query._sort;
-
-        Food.findAll()
-            .then(foods => {
-                res.header('Access-Control-Expose-Headers', 'X-Total-Count');
-                res.header('X-Total-Count', `${foods.length}`);
-
-                if (collumn === "id") {
-                    req.query._order === "ASC" ? foods.sort((a, b) => parseInt(a[collumn]) - parseInt(b[collumn])) : foods.sort((a, b) => parseInt(b[collumn]) - parseInt(a[collumn]));
-                    foods = foods.slice(req.query._start, req.query._end);
-                } else if (collumn === "price" || collumn === "createdAt" || collumn === "updatedAt" || collumn === "available") {
-                    req.query._order === "ASC" ? foods.sort((a, b) => a[collumn] - b[collumn]) : foods.sort((a, b) => b[collumn] - a[collumn]);
-                    foods = foods.slice(req.query._start, req.query._end);
-                }
-                else if (collumn !== undefined) {
-                    foods.sort((a, b) => compare(a[collumn], b[collumn], req.query._order));
-                    foods = foods.slice(req.query._start, req.query._end);
-                }
-
-                res.send(foods);
-            })
-            .catch(err => {
-                console.log(err)
-                res.send("Error")
-            })
+        let foods = await Food.findAll();
+        res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+        res.header('X-Total-Count', `${foods.length}`);
+        let sortedFoods = sort(req,foods);
+        res.send(sortedFoods);
     } catch (e) {
         res.send(e)
     }

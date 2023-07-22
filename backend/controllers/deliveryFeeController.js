@@ -4,31 +4,11 @@ const { compare } = require('../utils/sortHelper');
 
 const getAllDeliveries = async (req, res) => {
     try {
-        let collumn = req.query._sort;
-
-        Fee.findAll()
-            .then(fees => {
-                res.header('Access-Control-Expose-Headers', 'X-Total-Count');
-                res.header('X-Total-Count', `${fees.length}`);
-
-                if (collumn === "id") {
-                    req.query._order === "ASC" ? fees.sort((a, b) => parseInt(a[collumn]) - parseInt(b[collumn])) : fees.sort((a, b) => parseInt(b[collumn]) - parseInt(a[collumn]));
-                    fees = fees.slice(req.query._start, req.query._end);
-                } else if (collumn === "price" || collumn === "createdAt" || collumn === "updatedAt" || collumn === "available") {
-                    req.query._order === "ASC" ? fees.sort((a, b) => a[collumn] - b[collumn]) : fees.sort((a, b) => b[collumn] - a[collumn]);
-                    fees = fees.slice(req.query._start, req.query._end);
-                }
-                else if (collumn !== undefined) {
-                    fees.sort((a, b) => compare(a[collumn], b[collumn], req.query._order));
-                    fees = fees.slice(req.query._start, req.query._end);
-                }
-
-                res.send(fees);
-            })
-            .catch(err => {
-                console.log(err)
-                res.send("Error")
-            })
+        let fees = await Fee.findAll();
+        res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+        res.header('X-Total-Count', `${fees.length}`);
+        let sortedFees = sort(req,fees);
+        res.send(sortedFees);
     } catch (e) {
         res.send(e)
     }

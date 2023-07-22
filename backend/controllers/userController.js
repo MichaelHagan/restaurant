@@ -8,30 +8,11 @@ const { compare } = require('../utils/sortHelper');
 const getAllUsers = async (req, res) => {
 
     try {
-        let collumn = req.query._sort;
-
-        User.findAll()
-            .then(users => {
-                res.header('Access-Control-Expose-Headers', 'X-Total-Count');
-                res.header('X-Total-Count', `${users.length}`);
-
-                if (collumn === "id" || collumn === "phone_number") {
-                    req.query._order === "ASC" ? users.sort((a, b) => parseInt(a[collumn]) - parseInt(b[collumn])) : users.sort((a, b) => parseInt(b[collumn]) - parseInt(a[collumn]));
-                    users = users.slice(req.query._start, req.query._end);
-                } else if (collumn === "createdAt" || collumn === "updatedAt") {
-                    req.query._order === "ASC" ? users.sort((a, b) => a[collumn] - b[collumn]) : users.sort((a, b) => b[collumn] - a[collumn]);
-                    users = users.slice(req.query._start, req.query._end);
-                }
-                else if (collumn !== undefined) {
-                    users.sort((a, b) => compare(a[collumn], b[collumn], req.query._order));
-                    users = users.slice(req.query._start, req.query._end);
-                }
-                res.send(users);
-            })
-            .catch(err => {
-                console.log(err)
-                res.send("Error")
-            })
+        let users = await User.findAll();
+        res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+        res.header('X-Total-Count', `${users.length}`);
+        let sortedUsers = sort(req,users);
+        res.send(sortedUsers);
     } catch (e) {
         res.send(e)
     }
