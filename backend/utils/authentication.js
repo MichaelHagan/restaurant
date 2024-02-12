@@ -1,7 +1,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-function authenticate(req,res,next){
+export const authenticate = (req,res,next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   if(token == null) return res.status(401).json("Unauthorized");
@@ -11,4 +11,6 @@ function authenticate(req,res,next){
   })
 }
 
-module.exports = {authenticate};
+export const randomPasswordGen = () =>{
+  
+}
