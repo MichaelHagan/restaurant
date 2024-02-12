@@ -1,8 +1,8 @@
 import { stringify } from 'query-string';
-import { fetchUtils, DataProvider } from 'ra-core';
+import { fetchUtils } from 'ra-core';
 
 
-export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
+export default (apiUrl, httpClient = fetchUtils.fetchJson) => ({
     getList: (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;

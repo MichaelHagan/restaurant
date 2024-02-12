@@ -6,7 +6,7 @@ import {UserList, UserEdit, UserCreate} from "./components/users/Users";
 import PaymentsIcon from '@mui/icons-material/Payments';
 import LoginPage from "./components/login/LoginPage";
 import { SuperDeliveryList,DeliveryList,DeliveryEdit,DeliveryCreate } from "./components/deliveries/Deliveries";
-import Provider from "./dataProvider.ts";
+import Provider from "./dataProvider";
 import FoodIcon from "@mui/icons-material/FoodBank";
 import OrderIcon from "@mui/icons-material/DeliveryDining";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
