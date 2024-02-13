@@ -1,0 +1,6 @@
+-Create random password gen for new users.
+-Serialize and validate user inputs.
+-Add sign up and sign in screens (FE).
+-Landing page.
+-User profile page with editable fields.
+-User order page to view user's order history and current orders.
